@@ -1,0 +1,6 @@
+0
+76 98
+1 1
+archerTower.png
+1
+4032
