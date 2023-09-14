@@ -5,7 +5,7 @@
 
 #include "World.h"
 
-GAME_MODE Menu::gameMode = GAME_MODE::PLAYER;
+SCENE Menu::scene = SCENE::MENU;
 
 Menu::Menu()
 {
@@ -21,20 +21,20 @@ void Menu::run()
 	draw();
 }
 
-GAME_MODE Menu::getGameMode()
+SCENE Menu::getScene()
 {
-    return gameMode;
+    return scene;
 }
 
 void Menu::update()
 {
 	ImGui::Text("Choose the game mode");
-	const char* items[] = { "Player", "AI", "Training" };
+	const char* items[] = { "PLAYGROUND" };
 	if (ImGui::Combo("Options", &selectedModeIndex, items, IM_ARRAYSIZE(items))) {
 		printf("%d", selectedModeIndex);
 	}
 	if (ImGui::Button("Continue", ImVec2(200, 20))) {
-		World::setState(STATE(selectedModeIndex + 2));
+		World::setState(SCENE(selectedModeIndex + 2));
 	}
 }
 

@@ -5,44 +5,12 @@
 
 #include <SFML/Graphics.hpp>
 
-enum class STATE {
+enum class SCENE{
 	MENU = 1,
-	PLAYER = 2,
-	AI = 3,
-	TRAINING = 4,
+	PLAYGROUND = 2
 };
-
-enum class GAME_MODE {
-	PLAYER = 1,
-	AI = 2,
-	TRAINING = 3,
-};
-
-enum class CARD {
-	NONE = 0,
-	KNIGHT = 1,
-	FIREBALL = 2,
-	SKELETONS = 3,
-	GIANT = 4,
-	PIGEONS = 5,
-	WIZARD = 6,
-	DRAGON = 7,
-	BALLOON = 8,
-	SIZE = 9,
-};
-
-const int GAME_WINDOW_X = 696;
-const int GAME_WINDOW_Y = 105;
-const int GAME_WINDOW_W = 530;
-const int GAME_WINDOW_H = 720;
-
-const int MAIN_WINDOW_X = 656;
-const int MAIN_WINDOW_Y = 0;
-const int MAIN_WINDOW_W = 608;
-const int MAIN_WINDOW_H = 1080;
 
 const std::string CONFIG_FOLDER = "config/";
-const std::string CARDS_FOLDER = "cards/";
 const std::string UI_FOLDER = "ui/";
 const std::string IMAGE_FOLDER = "img/";
 
@@ -63,36 +31,12 @@ static bool inRect(sf::Vector2i p, sf::RectangleShape r) {
 	return false;
 }
 
-static std::string cardName(CARD c) {
-	switch (c)
-	{
-	case CARD::NONE:
-		break;
-	case CARD::KNIGHT:
-		return "knight";
-		break;
-	case CARD::FIREBALL:
-		return "fireball";
-		break;
-	case CARD::SKELETONS:
-		return "skeletons";
-		break;
-	case CARD::GIANT:
-		return "giant";
-		break;
-	case CARD::PIGEONS:
-		return "pigeons";
-		break;
-	case CARD::WIZARD:
-		return "wizard";
-		break;
-	case CARD::DRAGON:
-		return "dragon";
-		break;
-	case CARD::BALLOON:
-		return "balloon";
-		break;
-	default:
-		break;
-	}
+/*
+* @param c - centre of circle
+* @param r - radius
+* @param t - target (point to check)
+*/
+static bool inCircle(sf::Vector2f c, float r, sf::Vector2f t) {
+	if ((t.x - c.x) * (t.x - c.x) + (t.y - c.y) * (t.y - c.y) <= r * r) return true;
+	return false;
 }

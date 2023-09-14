@@ -16,32 +16,14 @@
     <Filter Include="Source Files\Managers">
       <UniqueIdentifier>{14986dde-f99e-4564-892e-4731e27f893b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Cards">
-      <UniqueIdentifier>{044d8cee-182d-4125-b1d8-0b59cc38b237}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Managers">
-      <UniqueIdentifier>{871f5e0e-b500-4c70-bb2f-64cbafde38f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Cards">
-      <UniqueIdentifier>{b4eb3b04-647e-4104-88cf-f74e00c5d5bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components">
-      <UniqueIdentifier>{e1d91b73-2d56-463c-8780-2bb9d8a3d5bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{62bb81a8-34e0-4f1e-aa64-90d82986c570}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\UI">
-      <UniqueIdentifier>{76f9407c-5548-41de-87f4-72f279204af7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\UI\Game">
-      <UniqueIdentifier>{bac21b74-c9ab-4146-b26a-9054f3dc8a2b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Managers\Game">
-      <UniqueIdentifier>{1b69f4f8-ee1f-4e77-b586-e6f8e82d2783}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Managers\Game">
       <UniqueIdentifier>{9545edc1-7943-47d7-86ae-2e93f45435b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Folder">
+      <UniqueIdentifier>{fa9d2b66-c981-435e-afb8-46b99e122bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Folder\Game">
+      <UniqueIdentifier>{4b9fd046-f047-467e-9f71-09330017ee3d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,23 +54,11 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Moving.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files\Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="Hand.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Config.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Managers\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Damageable.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,41 +89,20 @@
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="defines.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Damageable.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Moving.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files\Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files\Components</Filter>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Folder\Game</Filter>
     </ClInclude>
     <ClInclude Include="Config.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Folder</Filter>
     </ClInclude>
-    <ClInclude Include="Behaviour.h">
-      <Filter>Header Files\Components</Filter>
+    <ClInclude Include="defines.h">
+      <Filter>Header Files\Folder</Filter>
     </ClInclude>
-    <ClInclude Include="Hand.h">
-      <Filter>Header Files\UI\Game</Filter>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Folder</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files\Managers\Game</Filter>
+    <ClInclude Include="World.h">
+      <Filter>Header Files\Folder</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

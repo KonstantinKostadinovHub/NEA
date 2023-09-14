@@ -10,11 +10,11 @@ public:
 
 	void run();
 
-	static GAME_MODE getGameMode();
+	static SCENE getScene();
 private:
 	void update();
 	void draw();
 
 	int selectedModeIndex = 0;
-	static GAME_MODE gameMode;
+	static SCENE scene;
 };

@@ -7,31 +7,21 @@
 #include "defines.h"
 
 #include "Config.h"
-#include "Hand.h"
 
 class Game {
 public:
 	Game();
 	~Game();
 
-	void init(GAME_MODE _mode);
+	void init();
 
 	void run();
 
-	static void addObj(sf::Vector2i v, CARD c, int team);
-
 private:
-	void initTowers();
-
 	void update();
 	void draw();
 
-	static Config* config;
-	GAME_MODE mode;
-	Hand hand;
+	static std::shared_ptr<Config> config;
 
-	std::unique_ptr<sf::RectangleShape> background;
-	sf::RectangleShape arena;
-
-	static std::vector<std::unique_ptr<Object>> objects;
+	sf::RectangleShape background;
 };

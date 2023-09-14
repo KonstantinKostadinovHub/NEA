@@ -5,7 +5,7 @@
 #include <string>
 
 std::unique_ptr<sf::RenderWindow> World::window = nullptr;
-STATE World::state = STATE::MENU;
+SCENE World::state = SCENE::MENU;
 bool World::isLeftClicked = false;
 bool World::isLeftPressed = false;
 
@@ -23,12 +23,16 @@ void World::init()
 	ImGui::SFML::Init(*window);
 	
 	// Must be initialised after we have created the window
-	game.init(GAME_MODE::PLAYER);
+	game.init();
 	menu.init();
 }
 
 void World::run()
 {
+	float passed = deltaClock.getElapsedTime().asMilliseconds();
+	std::cout << int(1000 / passed) << " FPS \n";
+	deltaClock.restart();
+
 	isLeftClicked = false;
 
 	while (window->pollEvent(event)) {
@@ -53,14 +57,11 @@ void World::run()
 
 	ImGui::SFML::Update(*window, deltaClock.restart());
 
-	if (state == STATE::MENU) {
+	if (state == SCENE::MENU) {
 		menu.run();
-	}else if (state == STATE::PLAYER) {
+	}
+	else if (state == SCENE::PLAYGROUND) {
 		game.run();
-	}else if (state == STATE::AI) {
-		menu.run();
-	}else if (state == STATE::TRAINING) {
-		menu.run();
 	}
 
 	ImGui::SFML::Render(*window);
