@@ -14,7 +14,8 @@ void Line::setVertex(std::size_t i, sf::Vector2f v)
 	m_line[i].position = v;
 }
 
-void Line::draw()
+
+void Line::Draw()
 {
 	World::draw(m_line);
 }

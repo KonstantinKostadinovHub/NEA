@@ -5,6 +5,8 @@
 
 #include <vector>
 
+#include "Input.h"
+
 enum class plTool {
 	None = 0,
 	Line = 1
@@ -17,9 +19,10 @@ struct iTool {
 
 class ToolButton {
 public:
-	ToolButton() { m_framePadding = -1; };
+	ToolButton() { m_framePadding = -1; m_size = { 100, 100 }; }
 	virtual ~ToolButton() {};
 
+	void Init(sf::Sprite sprite) { m_sprite = sprite; }
 	bool Draw() { return ImGui::ImageButton(m_sprite, m_size, m_framePadding); };
 private:
 	sf::Sprite m_sprite;
@@ -34,12 +37,16 @@ public:
 	
 	void Init();
 	void Run();
+
+	static plTool GetSelected() { return m_selectedTool; };
 private:
 	void LoadTools();
 	
 	void AddTool(iTool t);
 
-	std::vector<iTool> m_tools;
+	std::map<plTool, ToolButton> m_tools;
 
-	plTool m_selectedTool;
+	static plTool m_selectedTool;
+	
+	Input& m_inputManager = Input::GetInstance();
 };

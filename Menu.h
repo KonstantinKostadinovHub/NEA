@@ -6,14 +6,14 @@ class Menu {
 public:
 	Menu();
 
-	void init();
+	void Init();
 
-	void run();
+	void Run();
 
 	static SCENE getScene();
 private:
-	void update();
-	void draw();
+	void Update();
+	void Draw();
 
 	int selectedModeIndex = 0;
 	static SCENE scene;

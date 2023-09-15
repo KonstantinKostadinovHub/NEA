@@ -11,14 +11,14 @@ Menu::Menu()
 {
 }
 
-void Menu::init()
+void Menu::Init()
 {
 }
 
-void Menu::run()
+void Menu::Run()
 {
-	update();
-	draw();
+	Update();
+	Draw();
 }
 
 SCENE Menu::getScene()
@@ -26,7 +26,7 @@ SCENE Menu::getScene()
     return scene;
 }
 
-void Menu::update()
+void Menu::Update()
 {
 	ImGui::Text("Choose the game mode");
 	const char* items[] = { "PLAYGROUND" };
@@ -34,11 +34,12 @@ void Menu::update()
 		printf("%d", selectedModeIndex);
 	}
 	if (ImGui::Button("Continue", ImVec2(200, 20))) {
+		printf("CLICKED");
 		World::setState(SCENE(selectedModeIndex + 2));
 	}
 }
 
-void Menu::draw()
+void Menu::Draw()
 {
     	
 }

@@ -9,36 +9,44 @@ std::shared_ptr<Config> Game::config = std::shared_ptr<Config>();
 
 Game::Game()
 {
+
 }
 
 Game::~Game()
 {
 }
 
-void Game::init()
+void Game::Init()
 {
 	config.reset(Config::getInstance());
 
-	background = sf::RectangleShape(sf::Vector2f(608, 1080));
-	background.setFillColor(sf::Color(255, 255, 255));
-	background.setPosition(656, 0);
+	m_background = sf::RectangleShape(sf::Vector2f(1920, 1080));
+	m_background.setFillColor(sf::Color(9, 6, 25));
+	m_background.setPosition(0, 0);
 	
 	config->init();
+
+	m_ui.Init();
 }
 
-void Game::run()
+void Game::Run()
 {
-	update();
-	draw();
+	Update();
+	m_ui.Run();
+	Draw();
 }
 
 
-void Game::update()
+void Game::Update()
 {
+	if (m_ui.GetSelected() != plTool::None && Input::IsMousePressed(mouseBtn::lClick)) {
+		m_geometryManager.Update();
+	}
 }
 
-void Game::draw()
+void Game::Draw()
 {
-	World::draw(background);
-	
+	World::draw(m_background);
+
+	m_geometryManager.Draw();
 }

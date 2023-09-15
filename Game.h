@@ -7,21 +7,25 @@
 #include "defines.h"
 
 #include "Config.h"
+#include "PlaygroundUI.h"
+#include "GeometryManager.h"
 
 class Game {
 public:
 	Game();
 	~Game();
 
-	void init();
+	void Init();
 
-	void run();
+	void Run();
 
 private:
-	void update();
-	void draw();
+	void Update();
+	void Draw();
 
 	static std::shared_ptr<Config> config;
 
-	sf::RectangleShape background;
+	sf::RectangleShape m_background;
+	PlaygrounUI m_ui;
+	GeometryManager& m_geometryManager = GeometryManager::GetInstance();
 };

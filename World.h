@@ -14,33 +14,27 @@ public:
 	void init();
 	void run();
 
-	bool isOpen() { return window->isOpen(); };
+	bool isOpen() { return m_window->isOpen(); };
 
-	static void draw(const sf::VertexArray drawable) { window.get()->draw(drawable); };
-	static void draw(const sf::Drawable& drawable) { window.get()->draw(drawable); };
-	static void draw(const sf::Sprite drawable) { window.get()->draw(drawable); };
-	static void draw(const sf::RectangleShape& drawable) { window->draw(drawable);  };
+	static void draw(const sf::VertexArray& drawable) { m_window.get()->draw(drawable); };
+	static void draw(const sf::Drawable& drawable) { m_window.get()->draw(drawable); };
+	static void draw(const sf::Sprite drawable) { m_window.get()->draw(drawable); };
+	static void draw(const sf::RectangleShape& drawable) { m_window->draw(drawable);  };
 
-	static sf::RenderWindow* getWindow() { return window.get(); };
+	static sf::RenderWindow* getWindow() { return m_window.get(); };
 
-	static void setState(SCENE _state) { state = _state; }
-
-	// Input
-	static sf::Vector2i getMouse();
-	static bool isClicked();
-	static bool isPressed();
-
+	static void setState(SCENE _state) { m_state = _state; }
 private:
-	static std::unique_ptr<sf::RenderWindow> window;
+	static std::shared_ptr<sf::RenderWindow> m_window;
 	sf::Clock deltaClock;
-	sf::Event event;
 
 	float lastTick;
 
-	static SCENE state;
+	static SCENE m_state;
 
-	Game game;
-	Menu menu;
+	Game m_game;
+	Menu m_menu;
+	Input& m_input = Input::GetInstance();
 
 	//Input
 	static bool isLeftClicked;
