@@ -7,8 +7,13 @@ plTool PlaygrounUI::m_selectedTool = plTool::None;
 void PlaygrounUI::LoadTools()
 {
 	iTool _tool;
+	
 	_tool.m_name = "Line";
 	_tool.m_enumCode = plTool::Line;
+	AddTool(_tool);
+
+	_tool.m_name = "BezierCurve";
+	_tool.m_enumCode = plTool::BezierCurve;
 	AddTool(_tool);
 }
 
@@ -35,11 +40,11 @@ void PlaygrounUI::Init()
 
 void PlaygrounUI::Run()
 {
-	for (auto itr = m_tools.begin(); itr != m_tools.end(); itr++)
+	for (auto& itr : m_tools)
 	{
-		if (itr->second.Draw())
+		if (itr.second.Draw())
 		{
-			m_selectedTool = plTool::Line;
+			m_selectedTool = itr.first;
 		}
 	}
 }

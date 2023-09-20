@@ -36,7 +36,18 @@ static bool inRect(sf::Vector2i p, sf::RectangleShape r) {
 * @param r - radius
 * @param t - target (point to check)
 */
-static bool inCircle(sf::Vector2f c, float r, sf::Vector2f t) {
+static bool inCircle(sf::Vector2f c, float r, sf::Vector2f t) 
+{
 	if ((t.x - c.x) * (t.x - c.x) + (t.y - c.y) * (t.y - c.y) <= r * r) return true;
 	return false;
+}
+
+static sf::Vector2f lerp(const sf::Vector2f& point1, const sf::Vector2f& point2, float t) {
+	t = std::max(0.0f, std::min(1.0f, t));
+
+	sf::Vector2f result;
+	result.x = point1.x + (point2.x - point1.x) * t;
+	result.y = point1.y + (point2.y - point1.y) * t;
+
+	return result;
 }

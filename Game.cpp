@@ -39,9 +39,7 @@ void Game::Run()
 
 void Game::Update()
 {
-	if (m_ui.GetSelected() != plTool::None && Input::IsMousePressed(mouseBtn::lClick)) {
-		m_geometryManager.Update();
-	}
+	m_geometryManager.Update();
 }
 
 void Game::Draw()

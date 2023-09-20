@@ -66,9 +66,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Managers\Game</Filter>
     </ClCompile>
-    <ClCompile Include="PlaygroundUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -77,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="Line.cpp">
       <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierCurve.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaygroundUI.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,12 +125,6 @@
     <ClInclude Include="World.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Line.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaygroundUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -135,6 +132,15 @@
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierCurve.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaygroundUI.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
