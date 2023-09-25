@@ -13,31 +13,58 @@ void GeometryManager::Update()
 {
 	if (PlaygrounUI::GetSelected() != plTool::None && Input::IsMousePressed(mouseBtn::click)) 
 	{
-		if (m_lastShape)
+		if (m_selectedIndex != size_t(-1))
 		{
-			m_lastShape->AddPoint({(float)Input::MouseCoor().x, (float)Input::MouseCoor().y});
-			
-			//m_lastShape = m_shapes[m_shapes.size() - 1];
+			m_lastShape->SetPoint(m_selectedIndex, sf::Vector2f(Input::MouseCoor()), m_selectionFlag);
 		}
-		else {
-			printf("Creating new line");
-			switch (PlaygrounUI::GetSelected())
+		else
+		{
+			auto data = CheckForSelection(sf::Vector2f(Input::MouseCoor()));
+			if (data.first != size_t(-1))
 			{
-			case plTool::Line:
-				m_shapes.push_back(std::shared_ptr<Line>(
-					new Line(sf::Vector2f(Input::MouseCoor()))
-					));
-				break;
-			case plTool::BezierCurve:
-				m_shapes.push_back(std::shared_ptr<BezierCurve>(
-					new BezierCurve(sf::Vector2f(Input::MouseCoor()))
-					));
-				break;
-			default:
-				break;
+				if (data.first)
+				{
+					printf("Set control array \n");
+					m_selectedIndex = data.first;
+				}
+
 			}
-			m_lastShape = m_shapes[m_shapes.size() - 1];
+			else
+			{
+				m_selectedIndex = size_t(-1);
+				if (Input::MouseOnClick(mouseBtn::click))
+				{
+					if (m_lastShape)
+					{
+						m_lastShape->AddPoint({ (float)Input::MouseCoor().x, (float)Input::MouseCoor().y });
+					}
+					else
+					{
+						printf("Creating new line");
+						switch (PlaygrounUI::GetSelected())
+						{
+						case plTool::Line:
+							m_shapes.push_back(std::make_shared<Line>(
+								sf::Vector2f(Input::MouseCoor())
+								));
+							break;
+						case plTool::BezierCurve:
+							m_shapes.push_back(std::make_shared<BezierCurve>(
+								sf::Vector2f(Input::MouseCoor())
+								));
+							break;
+						default:
+							break;
+						}
+						m_lastShape = m_shapes[m_shapes.size() - 1];
+					}
+				}
+			}
 		}
+	}
+	else
+	{
+		m_selectedIndex = size_t(-1);
 	}
 }
 
@@ -52,4 +79,24 @@ void GeometryManager::Draw()
 	{
 		shape->Draw();
 	}
+}
+
+/*
+* @return size_t - index of the point
+* @return int - flag
+*/
+std::pair<size_t, int> GeometryManager::CheckForSelection(sf::Vector2f mousePos)
+{
+	for (const auto& shape : m_shapes)
+	{
+		if (shape)
+		{
+			auto res = shape->IsSelected();
+			if (res.first != size_t(-1))
+			{
+				return res;
+			}
+		}
+	}
+	return {size_t(-1), -1};
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Line.h"
+#include "ControlPointArray.h"
 
 #include <memory>
 
@@ -17,8 +18,10 @@ public:
     void RemoveShape(size_t index);
 
     void Draw();
+
+    std::pair<size_t, int> CheckForSelection(sf::Vector2f mousePos);
 private:
-	GeometryManager(){};
+    GeometryManager() { m_selectedIndex = size_t(-1); };
 
     void AddShape(std::shared_ptr<Shape> shape);
     
@@ -27,4 +30,6 @@ private:
     GeometryManager& operator=(const GeometryManager&) = delete;
 
     std::shared_ptr<Shape> m_lastShape;
+    size_t m_selectedIndex;
+    int m_selectionFlag;
 };

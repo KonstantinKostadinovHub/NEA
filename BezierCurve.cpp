@@ -4,37 +4,52 @@
 
 #include "World.h"
 
-void BezierCurve::setVertex(std::size_t i, sf::Vector2f v)
+void BezierCurve::SetPoint(std::size_t i, sf::Vector2f v, int flag)
 {
-	m_controlPointLines[i].position = v;
+	m_controlPoints[i].position = v;
 	Recalculate();
 }
 
 void BezierCurve::AddPoint(sf::Vector2f v)
 {
-	m_controlPointLines.append(v);
-	m_controlPointLines[m_controlPointLines.getVertexCount() - 1].color = sf::Color(255, 255, 255, 50);
+	m_controlPoints.append(v);
+	m_controlPoints[m_controlPoints.getVertexCount() - 1].color = sf::Color(255, 255, 255, 50);
 	Recalculate();
 }
 
 void BezierCurve::Draw()
 {
-	World::draw(m_controlPointLines);
-	
 	World::draw(m_curve);
+	World::draw(m_controlPoints);
+	for (size_t i = 0; i < m_controlPoints.getVertexCount(); i++)
+	{
+		auto circle = sf::CircleShape(m_radius, 10);
+		circle.setPosition(m_controlPoints[i].position - sf::Vector2f(m_radius, m_radius));
+		World::draw(circle);
+	}
+}
+
+std::pair<size_t, int> BezierCurve::IsSelected() const
+{
+	for (size_t i = 0; i < m_controlPoints.getVertexCount(); i++)
+	{
+		if (inCircle(m_controlPoints[i].position, m_radius, sf::Vector2f(Input::MouseCoor())))
+		{
+			return { i, 0 };
+		}
+	}
+	return { size_t(-1), -1 };
 }
 
 void BezierCurve::Recalculate()
 {
 	m_curve.clear();
-	m_curve.append(m_controlPointLines[0]);
+	m_curve.append(m_controlPoints[0].position);
 	for (auto i = 0; i < m_samples; i++)
 	{
-		std::cout << LerpRecursively(m_controlPointLines, 1.0f / m_samples * i).x << " " << LerpRecursively(m_controlPointLines, 1.0f / m_samples * i).y << " \n";
-		m_curve.append(LerpRecursively(m_controlPointLines, 1.0f / m_samples * i));
+		m_curve.append(LerpRecursively(m_controlPoints, 1.0f / m_samples * i));
 	}
-	m_curve.append(m_controlPointLines[m_controlPointLines.getVertexCount() - 1]);
-	std::cout << " \n";
+	m_curve.append(m_controlPoints[m_controlPoints.getVertexCount() - 1]);
 }
 
 sf::Vector2f BezierCurve::LerpRecursively(const sf::VertexArray vertices, float t)

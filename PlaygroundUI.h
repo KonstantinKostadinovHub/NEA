@@ -9,8 +9,9 @@
 
 enum class plTool {
 	None = 0,
-	Line = 1,
-	BezierCurve = 2,
+	Default = 1,
+	Line = 2,
+	BezierCurve = 3,
 };
 
 struct iTool {

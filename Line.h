@@ -15,6 +15,7 @@ public:
 	void setColor(sf::Color c);
 	void setVertex(std::size_t i, sf::Vector2f v);
 
+	void SetPoint(size_t index, sf::Vector2f v, int flag = 0) override;
 	void AddPoint(sf::Vector2f e) override
 	{
 		m_line[1].position = e;
@@ -22,6 +23,8 @@ public:
 	};
 
 	void Draw() override;
+
+	std::pair<size_t, int> IsSelected() const override;
 private:
 	sf::VertexArray m_line;
 

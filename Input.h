@@ -38,11 +38,34 @@ public:
 			break;
 		}
 	};
+
+	static bool MouseOnClick(mouseBtn btn)
+	{
+		switch (btn)
+		{
+		case mouseBtn::click:
+			return m_onClick;
+			break;
+		case mouseBtn::lClick:
+			return m_onLClick;
+			break;
+		case mouseBtn::rClick:
+			return m_onRClick;
+			break;
+		default:
+			break;
+		}
+	}
 	static sf::Vector2i MouseCoor() { return m_window ? sf::Mouse::getPosition(*m_window) : sf::Vector2i(0, 0); }
 private:
 	static bool m_click;
 	static bool m_lClick;
 	static bool m_rClick;
+	
+	static bool m_onClick;
+	static bool m_onLClick;
+	static bool m_onRClick;
+
 	static std::shared_ptr<sf::RenderWindow> m_window;
 
 	sf::Event m_event;

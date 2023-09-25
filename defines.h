@@ -36,7 +36,7 @@ static bool inRect(sf::Vector2i p, sf::RectangleShape r) {
 * @param r - radius
 * @param t - target (point to check)
 */
-static bool inCircle(sf::Vector2f c, float r, sf::Vector2f t) 
+static bool inCircle(const sf::Vector2f& c, const float& r, const sf::Vector2f& t) 
 {
 	if ((t.x - c.x) * (t.x - c.x) + (t.y - c.y) * (t.y - c.y) <= r * r) return true;
 	return false;
