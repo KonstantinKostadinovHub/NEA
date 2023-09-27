@@ -7,9 +7,10 @@
 
 class BezierCurve : public Shape{
 public:
-	BezierCurve() {};
+	BezierCurve() { m_type = SHAPE::BEZIER_CURVE; };
 	virtual ~BezierCurve() {};
 	BezierCurve(sf::Vector2f s) {
+		m_type = SHAPE::BEZIER_CURVE;
 		m_controlPoints = sf::VertexArray(sf::LinesStrip, 1);
 		m_controlPoints[0].position = s;
 		m_controlPoints[0].color = sf::Color(255, 255, 255, 50);
@@ -20,6 +21,8 @@ public:
 
 	void AddPoint(sf::Vector2f v) override;
 	void SetPoint(std::size_t i, sf::Vector2f v, int flag = 0) override;
+
+	size_t GetControlPointsCount() override { return m_controlPoints.getVertexCount(); };
 
 	void Draw() override;
 

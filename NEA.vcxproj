@@ -162,6 +162,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PlaygroundUI.cpp" />
+    <ClCompile Include="Plotter.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +186,7 @@
     <ClInclude Include="Line.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PlaygroundUI.h" />
+    <ClInclude Include="Plotter.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

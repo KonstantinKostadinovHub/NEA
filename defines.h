@@ -10,6 +10,12 @@ enum class SCENE{
 	PLAYGROUND = 2
 };
 
+enum class SHAPE {
+	NONE = 0,
+	LINE = 1,
+	BEZIER_CURVE = 2,
+};
+
 const std::string CONFIG_FOLDER = "config/";
 const std::string UI_FOLDER = "ui/";
 const std::string IMAGE_FOLDER = "img/";
@@ -29,6 +35,21 @@ static bool inRect(sf::Vector2i p, sf::RectangleShape r) {
 		return true;
 	}
 	return false;
+}
+
+static unsigned long long binomialCoefficient(unsigned long long n, unsigned long long k) {
+	if (k > n - k) {
+		k = n - k; // Optimization to reduce calculations
+	}
+
+	unsigned long long result = 1;
+
+	for (unsigned long long i = 0; i < k; ++i) {
+		result *= (n - i);
+		result /= (i + 1);
+	}
+
+	return result;
 }
 
 /*

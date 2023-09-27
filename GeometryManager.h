@@ -29,6 +29,8 @@ private:
     GeometryManager(const GeometryManager&) = delete;
     GeometryManager& operator=(const GeometryManager&) = delete;
 
+    void ShowStats();
+
     std::shared_ptr<Shape> m_lastShape;
     size_t m_selectedIndex;
     int m_selectionFlag;

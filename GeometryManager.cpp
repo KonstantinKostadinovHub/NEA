@@ -3,10 +3,19 @@
 #include "PlaygroundUI.h"
 
 #include "BezierCurve.h"
+#include "Plotter.h"
 
 void GeometryManager::AddShape(std::shared_ptr<Shape> shape)
 {
 	m_shapes.push_back(shape);
+}
+
+void GeometryManager::ShowStats()
+{
+	if (m_lastShape)
+	{
+		Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
+	}
 }
 
 void GeometryManager::Update()
@@ -40,7 +49,6 @@ void GeometryManager::Update()
 					}
 					else
 					{
-						printf("Creating new line");
 						switch (PlaygrounUI::GetSelected())
 						{
 						case plTool::Line:
@@ -66,6 +74,8 @@ void GeometryManager::Update()
 	{
 		m_selectedIndex = size_t(-1);
 	}
+
+	ShowStats();
 }
 
 void GeometryManager::RemoveShape(size_t index)

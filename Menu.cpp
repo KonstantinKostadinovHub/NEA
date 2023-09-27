@@ -28,6 +28,7 @@ SCENE Menu::getScene()
 
 void Menu::Update()
 {
+	ImGui::Begin(" ", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoResize);
 	ImGui::Text("Choose the game mode");
 	const char* items[] = { "PLAYGROUND" };
 	if (ImGui::Combo("Options", &selectedModeIndex, items, IM_ARRAYSIZE(items))) {
@@ -37,6 +38,7 @@ void Menu::Update()
 		printf("CLICKED");
 		World::setState(SCENE(selectedModeIndex + 2));
 	}
+	ImGui::End();
 }
 
 void Menu::Draw()
