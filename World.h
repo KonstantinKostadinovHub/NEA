@@ -39,4 +39,6 @@ private:
 	//Input
 	static bool isLeftClicked;
 	static bool isLeftPressed;
+
+	void ShowFPS(float passed);
 };

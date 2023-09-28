@@ -36,7 +36,6 @@ void GeometryManager::Update()
 					printf("Set control array \n");
 					m_selectedIndex = data.first;
 				}
-
 			}
 			else
 			{

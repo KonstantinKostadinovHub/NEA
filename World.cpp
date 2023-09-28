@@ -32,12 +32,10 @@ void World::init()
 void World::run()
 {
 	float passed = deltaClock.getElapsedTime().asMilliseconds();
-	//std::cout << int(1000 / passed) << " FPS \n";
-	deltaClock.restart();
 
+	ImGui::SFML::Update(*m_window, deltaClock.restart());
 	m_window->clear(sf::Color(18, 33, 43));
 	m_input.Update();
-	ImGui::SFML::Update(*m_window, deltaClock.restart());
 	
 	if (m_state == SCENE::MENU) {
 		m_menu.Run();
@@ -46,6 +44,20 @@ void World::run()
 		m_game.Run();
 	}
 	
+	ShowFPS(passed);
 	ImGui::SFML::Render(*m_window);
 	m_window->display();
+
+}
+
+void World::ShowFPS(float passed)
+{
+	ImGui::SetNextWindowPos(ImVec2(1850, 1060));
+
+	ImGui::Begin("FPS", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoInputs);
+	
+	std::string fps = "FPS: " + std::to_string(int(1000 / passed));
+	ImGui::Text(fps.c_str());
+
+	ImGui::End();
 }
