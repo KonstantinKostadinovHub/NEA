@@ -23,6 +23,7 @@ public:
 	void SetPoint(std::size_t i, sf::Vector2f v, int flag = 0) override;
 
 	size_t GetControlPointsCount() override { return m_controlPoints.getVertexCount(); };
+	size_t GetPointsPerSection() const override { return m_samples; };
 
 	void Draw() override;
 
@@ -31,11 +32,10 @@ private:
 	void Recalculate();
 	sf::Vector2f LerpRecursively(sf::VertexArray vertices, float t);
 	
-	sf::VertexArray m_curve;
 	sf::VertexArray m_controlPoints;
 
-	float m_samples = 100;
-	float m_radius = 10;
+	const size_t m_samples = 20;
+	const float m_radius = 10;
 
 	sf::Color m_color;
 };

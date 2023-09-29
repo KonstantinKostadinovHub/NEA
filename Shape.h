@@ -13,6 +13,10 @@ public:
     virtual void AddPoint(sf::Vector2f e) = 0;
     virtual void SetPoint(size_t index, sf::Vector2f e, int flag = 0) = 0;
     virtual std::pair<size_t, int> IsSelected() const = 0;
+    sf::VertexArray GetVertexArray() const { return m_curve; };
+    virtual size_t GetPointsPerSection() const = 0;
 
     virtual size_t GetControlPointsCount() = 0;
+protected:
+    sf::VertexArray m_curve;
 };

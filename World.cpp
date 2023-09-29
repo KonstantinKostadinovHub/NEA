@@ -1,6 +1,7 @@
 #include "World.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui-SFML.h"
+#include "imgui/implot.h"
 
 #include <string>
 
@@ -21,6 +22,8 @@ void World::init()
 {
 	m_window.reset(new sf::RenderWindow(sf::VideoMode(1920, 1080), "Window Title", sf::Style::Fullscreen, sf::ContextSettings()));
 	ImGui::SFML::Init(*m_window);
+	ImGui::CreateContext();
+	ImPlot::CreateContext();
 	
 	// Must be initialised after we have created the window
 	m_game.Init();

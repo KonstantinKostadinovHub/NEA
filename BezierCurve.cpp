@@ -45,9 +45,10 @@ void BezierCurve::Recalculate()
 {
 	m_curve.clear();
 	m_curve.append(m_controlPoints[0].position);
-	for (auto i = 0; i < m_samples; i++)
+	const size_t controlPointsCount = m_controlPoints.getVertexCount();
+	for (auto i = 0; i < m_samples * controlPointsCount - 2; i++)
 	{
-		m_curve.append(LerpRecursively(m_controlPoints, 1.0f / m_samples * i));
+		m_curve.append(LerpRecursively(m_controlPoints, (1.0f * i) / (m_samples * controlPointsCount - 2)));
 	}
 	m_curve.append(m_controlPoints[m_controlPoints.getVertexCount() - 1]);
 }

@@ -20,6 +20,37 @@ void Plotter::ControlPointsGraph(SHAPE shape, size_t numberOfPoints)
 	}
 }
 
+void Plotter::VelocityGraph(const sf::VertexArray& points, size_t pointsPerSection)
+{
+	float* xCoor = new float[pointsPerSection];
+	float* yCoor = new float[pointsPerSection];
+	ImPlot::SetNextAxesLimits(-10.0, 10.0, -10.0, 10.0);
+	//std::cout << points.getVertexCount() << " " << pointsPerSection << "\n";
+	if (ImPlot::BeginPlot("Velocity Graph"))
+	{
+		for (size_t p = 0; p < points.getVertexCount() - 1; p++)
+		{
+			xCoor[p % pointsPerSection] = points[p].position.x - points[p + 1].position.x;
+			yCoor[p % pointsPerSection] = points[p].position.y - points[p + 1].position.y;
+
+			//if(p	/ pointsPerSection == 2) std::cout << points[p].position.x << " " << points[p + 1].position.x << "\n";
+
+			if (p % pointsPerSection == pointsPerSection - 1)
+			{
+				if (p != points.getVertexCount() - 2)
+				{
+					ImPlot::PlotLine(std::to_string(p / pointsPerSection).c_str(), xCoor, yCoor, pointsPerSection);
+				}
+				else
+				{
+					ImPlot::PlotLine(std::to_string(p / pointsPerSection).c_str(), xCoor, yCoor, pointsPerSection - 1);
+				}
+			}
+		}
+	}
+	ImPlot::EndPlot();
+}
+
 void Plotter::LineCPG(size_t numberOfPoints)
 {
 	
@@ -41,8 +72,8 @@ void Plotter::BezierCurveCPG(size_t numberOfPoints)
 		}
 		progress += step;
 	}
-	ImPlot::CreateContext();
-	if (ImPlot::BeginPlot("Control Point Impact Graph"))
+	ImPlot::SetNextAxesLimits(0, 1, 0, 1);
+	if (ImPlot::BeginPlot("Control Point Impact Graph", ImVec2(200, 200)))
 	{
 		for (size_t j = 0; j < numberOfPoints; j++)
 		{
@@ -50,5 +81,4 @@ void Plotter::BezierCurveCPG(size_t numberOfPoints)
 		}
 	}
 	ImPlot::EndPlot();
-	ImPlot::DestroyContext();
 }

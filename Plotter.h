@@ -8,6 +8,7 @@ public:
 	~Plotter() = delete;
 
 	static void ControlPointsGraph(SHAPE shape, size_t numberOfPoints);
+	static void VelocityGraph(const sf::VertexArray& points, size_t pointsPerSection);
 private:
 	static void LineCPG(size_t numberOfPoints);
 	static void BezierCurveCPG(size_t numberOfPoints);

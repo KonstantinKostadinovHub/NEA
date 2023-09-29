@@ -25,6 +25,8 @@ public:
 	void Draw() override;
 
 	size_t GetControlPointsCount() override { return m_line.getVertexCount(); };
+	size_t GetPointsPerSection() const override { return 1; };
+
 
 	std::pair<size_t, int> IsSelected() const override;
 private:

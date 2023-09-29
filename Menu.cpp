@@ -35,7 +35,6 @@ void Menu::Update()
 		printf("%d", selectedModeIndex);
 	}
 	if (ImGui::Button("Continue", ImVec2(200, 20))) {
-		printf("CLICKED");
 		World::setState(SCENE(selectedModeIndex + 2));
 	}
 	ImGui::End();
