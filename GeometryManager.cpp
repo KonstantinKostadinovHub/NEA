@@ -36,11 +36,8 @@ void GeometryManager::Update()
 			auto data = CheckForSelection(sf::Vector2f(Input::MouseCoor()));
 			if (data.first != size_t(-1))
 			{
-				if (data.first)
-				{
-					printf("Set control array \n");
-					m_selectedIndex = data.first;
-				}
+				printf("Set control array \n");
+				m_selectedIndex = data.first;
 			}
 			else
 			{
