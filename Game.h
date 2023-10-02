@@ -18,6 +18,7 @@ public:
 	void Init();
 
 	void Run();
+	PlaygrounUI m_ui;
 
 private:
 	void Update();
@@ -26,6 +27,5 @@ private:
 	static std::shared_ptr<Config> config;
 
 	sf::RectangleShape m_background;
-	PlaygrounUI m_ui;
 	GeometryManager& m_geometryManager = GeometryManager::GetInstance();
 };

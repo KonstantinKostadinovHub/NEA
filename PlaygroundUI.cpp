@@ -19,18 +19,9 @@ void PlaygrounUI::LoadTools()
 
 void PlaygrounUI::AddTool(iTool t)
 {
-	sf::Texture tex;
-	if (tex.loadFromFile(IMAGE_FOLDER + UI_FOLDER + t.m_name + ".png")) {
-		printf("Error: image not found: ");
-		printf(t.m_name.c_str());
-	}
-
-	sf::Sprite sprite;
-	sprite.setTexture(tex);
-
 	ToolButton btn;
-	btn.Init(sprite);
 	m_tools.insert({ t.m_enumCode, btn });
+	m_tools.at(t.m_enumCode).Init(IMAGE_FOLDER + UI_FOLDER + t.m_name + ".png");
 }
 
 void PlaygrounUI::Init()
@@ -40,11 +31,16 @@ void PlaygrounUI::Init()
 
 void PlaygrounUI::Run()
 {
-	for (auto& itr : m_tools)
+	ImGui::SetNextWindowPos(ImVec2(500, 0));
+	if (ImGui::Begin(" ", NULL, DEFAULT_WINDOW))
 	{
-		if (itr.second.Draw())
+		for (auto& itr : m_tools)
 		{
-			m_selectedTool = itr.first;
+			if (itr.second.Draw())
+			{
+				m_selectedTool = itr.first;
+			}
 		}
 	}
+	ImGui::End();
 }

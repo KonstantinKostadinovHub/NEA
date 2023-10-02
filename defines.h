@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include <SFML/Graphics.hpp>
+#include "imgui/imgui.h"
 
 enum class SCENE{
 	MENU = 1,
@@ -19,6 +20,8 @@ enum class SHAPE {
 const std::string CONFIG_FOLDER = "config/";
 const std::string UI_FOLDER = "ui/";
 const std::string IMAGE_FOLDER = "img/";
+
+constexpr ImGuiWindowFlags DEFAULT_WINDOW = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoResize;
 
 static int distance(int x1, int y1, int x2, int y2) {
 	return std::sqrt(std::pow((x1 - x2), 2) + pow((y1 - y2), 2));

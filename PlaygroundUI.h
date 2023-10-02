@@ -21,13 +21,14 @@ struct iTool {
 
 class ToolButton {
 public:
-	ToolButton() { m_framePadding = -1; m_size = { 100, 100 }; }
+	ToolButton() { m_framePadding = -1; m_size = { 30, 30}; }
 	virtual ~ToolButton() {};
 
-	void Init(sf::Sprite sprite) { m_sprite = sprite; }
-	bool Draw() { return ImGui::ImageButton(m_sprite, m_size, m_framePadding); };
+	void Init(std::string file) { m_tex.loadFromFile(file); m_sprite.setTexture(m_tex); }
+	bool Draw() { ImGui::SameLine(); return ImGui::ImageButton(m_sprite, m_size, m_framePadding); };
 private:
 	sf::Sprite m_sprite;
+	sf::Texture m_tex;
 	sf::Vector2f m_size;
 	int m_framePadding;
 };

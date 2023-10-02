@@ -25,7 +25,7 @@ void Plotter::VelocityGraph(const sf::VertexArray& points, size_t pointsPerSecti
 	float* xCoor = new float[pointsPerSection];
 	float* yCoor = new float[pointsPerSection];
 	ImPlot::SetNextAxesLimits(-10.0, 10.0, -10.0, 10.0);
-	//std::cout << points.getVertexCount() << " " << pointsPerSection << "\n";
+
 	if (ImPlot::BeginPlot("Velocity Graph"))
 	{
 		for (size_t p = 0; p < points.getVertexCount() - 1; p++)
@@ -33,13 +33,11 @@ void Plotter::VelocityGraph(const sf::VertexArray& points, size_t pointsPerSecti
 			xCoor[p % pointsPerSection] = points[p].position.x - points[p + 1].position.x;
 			yCoor[p % pointsPerSection] = points[p].position.y - points[p + 1].position.y;
 
-			//if(p	/ pointsPerSection == 2) std::cout << points[p].position.x << " " << points[p + 1].position.x << "\n";
-
 			if (p % pointsPerSection == pointsPerSection - 1)
 			{
 				if (p != points.getVertexCount() - 2)
 				{
-					ImPlot::PlotLine(std::to_string(p / pointsPerSection).c_str(), xCoor, yCoor, pointsPerSection);
+					ImPlot::PlotLine(std::to_string(p / pointsPerSection).c_str(), xCoor, yCoor, pointsPerSection - 1);
 				}
 				else
 				{

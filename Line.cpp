@@ -20,9 +20,21 @@ void Line::SetPoint(size_t index, sf::Vector2f v, int flag)
 }
 
 
+void Line::Recalculate()
+{
+	m_curve.clear();
+	for (size_t i = 0; i < m_line.getVertexCount() - 1; i++)
+	{
+		for (size_t t = 1; t <= m_pointsPerSection; t++)
+		{
+			m_curve.append(lerp(m_line[i].position, m_line[i + 1].position, 1.0f / float(m_pointsPerSection) * t));
+		}
+	}
+}
+
 void Line::Draw()
 {
-	World::draw(m_line);
+	World::draw(m_curve);
 }
 
 std::pair<size_t, int> Line::IsSelected() const
