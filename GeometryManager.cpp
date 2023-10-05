@@ -18,6 +18,7 @@ void GeometryManager::ShowStats()
 		{
 			Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
 			Plotter::VelocityGraph(m_lastShape->GetVertexArray(), m_lastShape->GetPointsPerSection());
+			Plotter::DrawTangentVectors(m_lastShape->GetVertexArray());
 		}
 		ImGui::End();
 	}
@@ -75,8 +76,6 @@ void GeometryManager::Update()
 	{
 		m_selectedIndex = size_t(-1);
 	}
-
-	ShowStats();
 }
 
 void GeometryManager::RemoveShape(size_t index)
@@ -90,6 +89,8 @@ void GeometryManager::Draw()
 	{
 		shape->Draw();
 	}
+
+	ShowStats();
 }
 
 /*

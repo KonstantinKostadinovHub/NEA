@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 
+#include "World.h"
+
 void Plotter::ControlPointsGraph(SHAPE shape, size_t numberOfPoints)
 {
 	switch (shape)
@@ -47,6 +49,34 @@ void Plotter::VelocityGraph(const sf::VertexArray& points, size_t pointsPerSecti
 		}
 	}
 	ImPlot::EndPlot();
+}
+
+void Plotter::DrawTangentVectors(const sf::VertexArray& points)
+{
+	sf::VertexArray tangent = sf::VertexArray(sf::LinesStrip, 2);
+	sf::VertexArray perp = sf::VertexArray(sf::LinesStrip, 2);
+
+	tangent[0].color = sf::Color(0, 255, 0, 255);
+	tangent[1].color = sf::Color(0, 255, 0, 255);
+
+
+	perp[0].color = sf::Color(255, 0, 0, 255);
+	perp[1].color = sf::Color(255, 0, 0, 255);
+
+	for (size_t i = m_tangentStep; i < points.getVertexCount(); i += 5)
+	{
+		tangent[0].position = points[i].position;
+		tangent[1].position = points[i].position * 2.0f - points[i - m_tangentStep].position;
+
+
+		perp[0].position = points[i].position;
+		perp[1].position = points[i].position +
+			sf::Vector2f(points[i].position.y - points[i - m_tangentStep].position.y,
+				points[i - m_tangentStep].position.x - points[i].position.x);
+
+		World::draw(tangent);
+		World::draw(perp);
+	}
 }
 
 void Plotter::LineCPG(size_t numberOfPoints)
