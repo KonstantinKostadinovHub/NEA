@@ -19,7 +19,8 @@ void BezierCurve::AddPoint(sf::Vector2f v)
 
 void BezierCurve::Draw()
 {
-	World::draw(m_curve);
+	UpdateLastVisiblePoint();
+	World::draw(m_curveToDraw);
 	World::draw(m_controlPoints);
 	for (size_t i = 0; i < m_controlPoints.getVertexCount(); i++)
 	{
@@ -27,6 +28,7 @@ void BezierCurve::Draw()
 		circle.setPosition(m_controlPoints[i].position - sf::Vector2f(m_radius, m_radius));
 		World::draw(circle);
 	}
+	
 }
 
 std::pair<size_t, int> BezierCurve::IsSelected() const
@@ -43,6 +45,7 @@ std::pair<size_t, int> BezierCurve::IsSelected() const
 
 void BezierCurve::Recalculate()
 {
+	m_lastPointInfo.first = 0;
 	m_curve.clear();
 	m_curve.append(m_controlPoints[0].position);
 	const size_t controlPointsCount = m_controlPoints.getVertexCount();
@@ -67,4 +70,22 @@ sf::Vector2f BezierCurve::LerpRecursively(const sf::VertexArray vertices, float 
 	}
 
 	return res;
+}
+
+void BezierCurve::UpdateLastVisiblePoint()
+{	
+	if (m_lastPointInfo.first + 1 != m_curve.getVertexCount())
+	{
+		if (m_msPerPoint < World::GetTimeInMs() - m_lastPointInfo.second)
+		{
+			m_lastPointInfo.second = World::GetTimeInMs();
+			m_lastPointInfo.first++;
+			std::cout << m_lastPointInfo.first << std::endl;
+			m_curveToDraw.clear();
+			for (size_t i = 0; i <= m_lastPointInfo.first; i++)
+			{
+				m_curveToDraw.append(m_curve[i].position);
+			}
+		}
+	}
 }

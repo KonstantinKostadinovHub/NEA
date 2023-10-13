@@ -16,9 +16,9 @@ void GeometryManager::ShowStats()
 	{
 		if (ImGui::Begin("Graphs", NULL, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse))
 		{
-			Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
-			Plotter::VelocityGraph(m_lastShape->GetVertexArray(), m_lastShape->GetPointsPerSection());
-			Plotter::DrawTangentVectors(m_lastShape->GetVertexArray());
+			//Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
+			//Plotter::VelocityGraph(m_lastShape->GetVertexArray(), m_lastShape->GetPointsPerSection());
+			//Plotter::DrawTangentVectors(m_lastShape->GetVertexArray());
 		}
 		ImGui::End();
 	}

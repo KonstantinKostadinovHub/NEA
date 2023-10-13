@@ -7,8 +7,7 @@
 
 std::shared_ptr<sf::RenderWindow> World::m_window = nullptr;
 SCENE World::m_state = SCENE::MENU;
-bool World::isLeftClicked = false;
-bool World::isLeftPressed = false;
+sf::Clock World::m_runClock = sf::Clock();
 
 World::World()
 {
@@ -30,6 +29,8 @@ void World::init()
 	m_menu.Init();
 	m_input = Input::GetInstance();
 	m_input.Init(m_window);
+
+	m_runClock.restart();
 }
 
 void World::run()
@@ -51,6 +52,11 @@ void World::run()
 	ImGui::SFML::Render(*m_window);
 	m_window->display();
 
+}
+
+int World::GetTimeInMs()
+{
+	return m_runClock.getElapsedTime().asMilliseconds();
 }
 
 void World::ShowFPS(float passed)

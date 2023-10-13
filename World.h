@@ -24,9 +24,12 @@ public:
 	static sf::RenderWindow* getWindow() { return m_window.get(); };
 
 	static void setState(SCENE _state) { m_state = _state; }
+
+	static int GetTimeInMs();
 private:
 	static std::shared_ptr<sf::RenderWindow> m_window;
 	sf::Clock deltaClock;
+	static sf::Clock m_runClock;
 
 	float lastTick;
 
