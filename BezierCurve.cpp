@@ -28,7 +28,7 @@ void BezierCurve::Draw()
 		circle.setPosition(m_controlPoints[i].position - sf::Vector2f(m_radius, m_radius));
 		World::draw(circle);
 	}
-	
+	//World::draw(m_osculatingCircleRadiuses);
 }
 
 std::pair<size_t, int> BezierCurve::IsSelected() const
@@ -54,6 +54,10 @@ void BezierCurve::Recalculate()
 		m_curve.append(LerpRecursively(m_controlPoints, (1.0f * i) / (m_samples * controlPointsCount - 2)));
 	}
 	m_curve.append(m_controlPoints[m_controlPoints.getVertexCount() - 1]);
+
+	CDerivative(m_curve, m_firstDerivative);
+	CDerivative(m_firstDerivative, m_secondDerivative);
+	COsculatingRadiuses();
 }
 
 sf::Vector2f BezierCurve::LerpRecursively(const sf::VertexArray vertices, float t)

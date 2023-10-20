@@ -63,7 +63,7 @@ void Plotter::DrawTangentVectors(const sf::VertexArray& points)
 	perp[0].color = sf::Color(255, 0, 0, 255);
 	perp[1].color = sf::Color(255, 0, 0, 255);
 
-	for (size_t i = m_tangentStep; i < points.getVertexCount(); i += 5)
+	for (size_t i = m_tangentStep; i < points.getVertexCount(); i += m_tangentStep)
 	{
 		tangent[0].position = points[i].position;
 		tangent[1].position = points[i].position * 2.0f - points[i - m_tangentStep].position;

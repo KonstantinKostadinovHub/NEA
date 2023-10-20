@@ -42,7 +42,7 @@ private:
 
 	sf::VertexArray m_curveToDraw;
 	sf::VertexArray m_controlPoints;
-
+	
 	const size_t m_samples = 20;
 	const float m_radius = 10;
 

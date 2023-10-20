@@ -27,6 +27,11 @@ static int distance(int x1, int y1, int x2, int y2) {
 	return std::sqrt(std::pow((x1 - x2), 2) + pow((y1 - y2), 2));
 }
 
+static float magnitude(sf::Vector2f a)
+{
+	return sqrt(a.x * a.x + a.y * a.y);
+}
+
 static sf::Vector2f makeUnit(sf::Vector2f v) {
 	float l = std::sqrt(v.x * v.x + v.y * v.y);
 	return sf::Vector2f(v.x / l, v.y / l);
