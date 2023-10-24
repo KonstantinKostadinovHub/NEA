@@ -28,7 +28,7 @@ void BezierCurve::Draw()
 		circle.setPosition(m_controlPoints[i].position - sf::Vector2f(m_radius, m_radius));
 		World::draw(circle);
 	}
-	//World::draw(m_osculatingCircleRadiuses);
+	World::draw(m_osculatingCircleRadiuses);
 }
 
 std::pair<size_t, int> BezierCurve::IsSelected() const

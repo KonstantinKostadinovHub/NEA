@@ -55,7 +55,7 @@ protected:
             m_osculatingCircleRadiuses.append(m_curve[i].position);
             // TODO find the size of the vector
             // Multiply it by the perp vector
-            m_osculatingCircleRadiuses.append(m_curve[i].position + m_perp[i].position / magnitude(m_secondDerivative[i - 1].position));
+            m_osculatingCircleRadiuses.append(m_curve[i].position + m_perp[i].position * magnitude(m_firstDerivative[i].position) / magnitude(m_secondDerivative[i - 1].position));
         }
     }
 };
