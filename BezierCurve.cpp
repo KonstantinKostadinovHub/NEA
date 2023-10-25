@@ -84,7 +84,6 @@ void BezierCurve::UpdateLastVisiblePoint()
 		{
 			m_lastPointInfo.second = World::GetTimeInMs();
 			m_lastPointInfo.first++;
-			std::cout << m_lastPointInfo.first << std::endl;
 			m_curveToDraw.clear();
 			for (size_t i = 0; i <= m_lastPointInfo.first; i++)
 			{
