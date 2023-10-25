@@ -20,20 +20,19 @@ void Game::Init()
 {
 	config.reset(Config::getInstance());
 
-	m_background = sf::RectangleShape(sf::Vector2f(1920, 1080));
-	m_background.setFillColor(sf::Color(9, 6, 25));
-	m_background.setPosition(0, 0);
+	m_background.Init();
 	
 	config->init();
 
 	m_ui.Init();
+
 }
 
 void Game::Run()
 {
 	Update();
-	m_ui.Run();
 	Draw();
+	m_ui.Run();
 }
 
 
@@ -44,7 +43,7 @@ void Game::Update()
 
 void Game::Draw()
 {
-	World::draw(m_background);
+	m_background.Draw();
 
 	m_geometryManager.Draw();
 }

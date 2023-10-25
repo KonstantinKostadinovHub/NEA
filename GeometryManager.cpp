@@ -14,7 +14,7 @@ void GeometryManager::ShowStats()
 {
 	if (m_lastShape)
 	{
-		if (ImGui::Begin("Graphs", NULL, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse))
+		if (ImGui::Begin("Graphs", NULL, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar))
 		{
 			Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
 			Plotter::VelocityGraph(m_lastShape->GetVertexArray(), m_lastShape->GetPointsPerSection());

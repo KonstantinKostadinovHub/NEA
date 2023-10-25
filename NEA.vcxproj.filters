@@ -96,6 +96,9 @@
     <ClCompile Include="Plotter.cpp">
       <Filter>Source Files\Plotting</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="Plotter.h">
       <Filter>Header Files\Plotting</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

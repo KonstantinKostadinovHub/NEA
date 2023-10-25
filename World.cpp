@@ -38,7 +38,7 @@ void World::run()
 	float passed = deltaClock.getElapsedTime().asMilliseconds();
 
 	ImGui::SFML::Update(*m_window, deltaClock.restart());
-	m_window->clear(sf::Color(18, 33, 43));
+	m_window->clear(sf::Color(33, 30, 41));
 	m_input.Update();
 	
 	if (m_state == SCENE::MENU) {

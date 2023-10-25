@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BezierCurve.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="BezierCurve.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="defines.h" />

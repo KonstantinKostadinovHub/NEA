@@ -9,6 +9,7 @@
 #include "Config.h"
 #include "PlaygroundUI.h"
 #include "GeometryManager.h"
+#include "Background.h"
 
 class Game {
 public:
@@ -26,6 +27,6 @@ private:
 
 	static std::shared_ptr<Config> config;
 
-	sf::RectangleShape m_background;
+	Background m_background;
 	GeometryManager& m_geometryManager = GeometryManager::GetInstance();
 };
