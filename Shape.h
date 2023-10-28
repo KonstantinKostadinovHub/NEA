@@ -17,6 +17,8 @@ public:
     virtual size_t GetPointsPerSection() const = 0;
 
     virtual size_t GetControlPointsCount() = 0;
+
+    static bool m_drawOsculatingCircleGraph;
 protected:
     sf::VertexArray m_curve; 
     sf::VertexArray m_perp; 
@@ -47,15 +49,18 @@ protected:
 
     void COsculatingRadiuses()
     {
-        m_osculatingCircleRadiuses = sf::VertexArray(sf::Lines);
-        m_osculatingCircleRadiuses.clear();
-        CPerp();
-        for (size_t i = 2; i < m_secondDerivative.getVertexCount(); i++)
+        if (m_drawOsculatingCircleGraph)
         {
-            m_osculatingCircleRadiuses.append(m_curve[i].position);
-            // TODO find the size of the vector
-            // Multiply it by the perp vector
-            m_osculatingCircleRadiuses.append(m_curve[i].position + m_perp[i].position * magnitude(m_firstDerivative[i].position) / magnitude(m_secondDerivative[i - 1].position));
+            m_osculatingCircleRadiuses = sf::VertexArray(sf::Lines);
+            m_osculatingCircleRadiuses.clear();
+            CPerp();
+            for (size_t i = 2; i < m_secondDerivative.getVertexCount(); i++)
+            {
+                m_osculatingCircleRadiuses.append(m_curve[i].position);
+                // TODO find the size of the vector
+                // Multiply it by the perp vector
+                m_osculatingCircleRadiuses.append(m_curve[i].position + m_perp[i].position * magnitude(m_firstDerivative[i].position) / magnitude(m_secondDerivative[i - 1].position));
+            }
         }
     }
 };

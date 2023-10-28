@@ -24,6 +24,8 @@ void Game::Init()
 	
 	config->init();
 
+	m_geometryManager.Init();
+
 	m_ui.Init();
 
 }

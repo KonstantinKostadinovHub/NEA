@@ -164,6 +164,8 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PlaygroundUI.cpp" />
     <ClCompile Include="Plotter.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="StatsUI.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>

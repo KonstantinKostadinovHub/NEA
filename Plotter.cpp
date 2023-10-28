@@ -28,7 +28,7 @@ void Plotter::VelocityGraph(const sf::VertexArray& points, size_t pointsPerSecti
 	float* yCoor = new float[pointsPerSection];
 	ImPlot::SetNextAxesLimits(-10.0, 10.0, -10.0, 10.0);
 
-	if (ImPlot::BeginPlot("Velocity Graph"))
+	if (ImPlot::BeginPlot("Velocity Graph", ImVec2(350, 350), ImPlotFlags_NoFrame))
 	{
 		for (size_t p = 0; p < points.getVertexCount() - 1; p++)
 		{
@@ -101,7 +101,7 @@ void Plotter::BezierCurveCPG(size_t numberOfPoints)
 		progress += step;
 	}
 	ImPlot::SetNextAxesLimits(0, 1, 0, 1);
-	if (ImPlot::BeginPlot("Control Point Impact Graph", ImVec2(200, 200)))
+	if (ImPlot::BeginPlot("Control Point Impact Graph", ImVec2(350, 350), ImPlotFlags_NoFrame))
 	{
 		for (size_t j = 0; j < numberOfPoints; j++)
 		{

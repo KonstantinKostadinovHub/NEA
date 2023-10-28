@@ -29,11 +29,24 @@ void GeometryManager::ShowStats()
 {
 	if (m_lastShape)
 	{
-		if (ImGui::Begin("Graphs", NULL, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar))
+		Shape::m_drawOsculatingCircleGraph = false;
+		if(m_statsUI.GetSelected() == STAT::OSCULATING_CIRCLE) Shape::m_drawOsculatingCircleGraph = true;
+		if (ImGui::Begin("Graphs", NULL, DEFAULT_WINDOW))
 		{
-			//Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
-			//Plotter::VelocityGraph(m_lastShape->GetVertexArray(), m_lastShape->GetPointsPerSection());
-			//Plotter::DrawTangentVectors(m_lastShape->GetVertexArray());
+			switch (m_statsUI.GetSelected())
+			{
+			case STAT::FIRST_DERIVATIVE:
+				Plotter::VelocityGraph(m_lastShape->GetVertexArray(), m_lastShape->GetPointsPerSection());
+				break;
+			case STAT::SECOND_DERIVATIVE:
+				Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
+				break;
+			case STAT::PERPENDICULARS:
+				Plotter::DrawTangentVectors(m_lastShape->GetVertexArray());
+				break;
+			default:
+				break;
+			}
 		}
 		ImGui::End();
 	}
@@ -62,7 +75,6 @@ void GeometryManager::Update()
 			auto data = CheckForSelection(sf::Vector2f(Input::MouseCoor()));
 			if (data.first != size_t(-1))
 			{
-				printf("Set control array \n");
 				m_selectedIndex = data.first;
 			}
 			else
@@ -99,6 +111,8 @@ void GeometryManager::RemoveShape(size_t index)
 
 void GeometryManager::Draw()
 {
+	m_statsUI.Run();
+
 	for (auto& shape : m_shapes)
 	{
 		shape->Draw();

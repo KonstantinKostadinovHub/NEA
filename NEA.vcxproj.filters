@@ -102,6 +102,12 @@
     <ClCompile Include="Background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StatsUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">

@@ -5,6 +5,8 @@
 
 #include <memory>
 
+#include "StatsUI.h"
+
 class GeometryManager {
 public:
     std::vector<std::shared_ptr<Shape>> m_shapes;
@@ -13,6 +15,8 @@ public:
         static GeometryManager instance; // Guaranteed to be destroyed once
         return instance;
     }
+
+    void Init() { m_statsUI.Init(); };
 
     void Update();
     void RemoveShape(size_t index);
@@ -32,6 +36,8 @@ private:
     void ShowStats();
 
     bool OverlapUI();
+
+    StatsUI m_statsUI;
 
     std::shared_ptr<Shape> m_lastShape;
     size_t m_selectedIndex;
