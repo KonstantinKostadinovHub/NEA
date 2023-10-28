@@ -22,14 +22,16 @@ public:
     std::pair<size_t, int> CheckForSelection(sf::Vector2f mousePos);
 private:
     GeometryManager() { m_selectedIndex = size_t(-1); };
-
-    void AddShape(std::shared_ptr<Shape> shape);
     
     // Private copy constructor and assignment operator to prevent copying
     GeometryManager(const GeometryManager&) = delete;
     GeometryManager& operator=(const GeometryManager&) = delete;
 
+    void CreatePoint();
+
     void ShowStats();
+
+    bool OverlapUI();
 
     std::shared_ptr<Shape> m_lastShape;
     size_t m_selectedIndex;

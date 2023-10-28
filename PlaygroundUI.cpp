@@ -3,18 +3,18 @@
 #include "World.h"
 #include "defines.h"
 
-plTool PlaygrounUI::m_selectedTool = plTool::None;
+SHAPE PlaygrounUI::m_selectedTool = SHAPE::NONE;
 
 void PlaygrounUI::LoadTools()
 {
 	iTool _tool;
 	
 	_tool.m_name = "Line";
-	_tool.m_enumCode = plTool::Line;
+	_tool.m_enumCode = SHAPE::LINE;
 	AddTool(_tool);
 
 	_tool.m_name = "BezierCurve";
-	_tool.m_enumCode = plTool::BezierCurve;
+	_tool.m_enumCode = SHAPE::BEZIER_CURVE;
 	AddTool(_tool);
 
 	m_splineBarTx.loadFromFile(IMAGE_FOLDER + UI_FOLDER + "spline_bar.png");

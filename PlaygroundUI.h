@@ -3,22 +3,14 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui-SFML.h"
 
-#include "SFML/Graphics.hpp"
-
 #include <vector>
 
 #include "Input.h"
-
-enum class plTool {
-	None = 0,
-	Default = 1,
-	Line = 2,
-	BezierCurve = 3,
-};
+#include "defines.h"
 
 struct iTool {
 	std::string m_name;
-	plTool m_enumCode;
+	SHAPE m_enumCode;
 };
 
 class ToolButton {
@@ -51,15 +43,15 @@ public:
 	void Init();
 	void Run();
 
-	static plTool GetSelected() { return m_selectedTool; };
+	static SHAPE GetSelected() { return m_selectedTool; };
 private:
 	void LoadTools();
 	
 	void AddTool(iTool t);
 
-	std::map<plTool, ToolButton> m_tools;
+	std::map<SHAPE, ToolButton> m_tools;
 
-	static plTool m_selectedTool;
+	static SHAPE m_selectedTool;
 	
 	Input& m_inputManager = Input::GetInstance();
 	

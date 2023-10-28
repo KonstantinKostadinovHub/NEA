@@ -5,9 +5,24 @@
 #include "BezierCurve.h"
 #include "Plotter.h"
 
-void GeometryManager::AddShape(std::shared_ptr<Shape> shape)
+void GeometryManager::CreatePoint()
 {
-	m_shapes.push_back(shape);
+	switch (PlaygrounUI::GetSelected())
+	{
+	case SHAPE::LINE:
+		m_shapes.push_back(std::make_shared<Line>(
+			sf::Vector2f(Input::MouseCoor())
+			));
+		break;
+	case SHAPE::BEZIER_CURVE:
+		m_shapes.push_back(std::make_shared<BezierCurve>(
+			sf::Vector2f(Input::MouseCoor())
+			));
+		break;
+	default:
+		break;
+	}
+	m_lastShape = m_shapes[m_shapes.size() - 1];
 }
 
 void GeometryManager::ShowStats()
@@ -24,9 +39,19 @@ void GeometryManager::ShowStats()
 	}
 }
 
+bool GeometryManager::OverlapUI()
+{
+	sf::RectangleShape horizontalBar(sf::Vector2f(480, 64));
+	horizontalBar.setPosition(sf::Vector2f(720, 27));
+	sf::RectangleShape verticalBar(sf::Vector2f(53, 969));
+	verticalBar.setPosition(sf::Vector2f(23, 81));
+	sf::Vector2i m = Input::MouseCoor();
+	return inRect(m, horizontalBar) || inRect(m, verticalBar);
+}
+
 void GeometryManager::Update()
 {
-	if (PlaygrounUI::GetSelected() != plTool::None && Input::IsMousePressed(mouseBtn::click)) 
+	if (PlaygrounUI::GetSelected() != SHAPE::NONE && Input::IsMousePressed(mouseBtn::click) && !OverlapUI())
 	{
 		if (m_selectedIndex != size_t(-1))
 		{
@@ -47,26 +72,15 @@ void GeometryManager::Update()
 				{
 					if (m_lastShape)
 					{
+						if (PlaygrounUI::GetSelected() != m_lastShape->m_type)
+						{
+							CreatePoint();
+						}
 						m_lastShape->AddPoint({ (float)Input::MouseCoor().x, (float)Input::MouseCoor().y });
 					}
 					else
 					{
-						switch (PlaygrounUI::GetSelected())
-						{
-						case plTool::Line:
-							m_shapes.push_back(std::make_shared<Line>(
-								sf::Vector2f(Input::MouseCoor())
-								));
-							break;
-						case plTool::BezierCurve:
-							m_shapes.push_back(std::make_shared<BezierCurve>(
-								sf::Vector2f(Input::MouseCoor())
-								));
-							break;
-						default:
-							break;
-						}
-						m_lastShape = m_shapes[m_shapes.size() - 1];
+						CreatePoint();
 					}
 				}
 			}
