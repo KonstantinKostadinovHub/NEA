@@ -169,6 +169,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="BezierCurve.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="defines.h" />
     <ClInclude Include="Game.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="PlaygroundUI.h" />
     <ClInclude Include="Plotter.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="StatsUI.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

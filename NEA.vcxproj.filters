@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Plotting">
       <UniqueIdentifier>{c863bb0c-a569-4a4f-b7a1-a50ec733fd5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{9575cb14-4e21-4472-a958-f3cf07f9a37e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -172,6 +175,12 @@
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatsUI.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
