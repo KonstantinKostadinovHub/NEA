@@ -2,6 +2,8 @@
 
 #include "defines.h"
 
+#include <iostream>
+
 class Shape {
 public:
     Shape() {}
@@ -57,9 +59,20 @@ protected:
             for (size_t i = 2; i < m_secondDerivative.getVertexCount(); i++)
             {
                 m_osculatingCircleRadiuses.append(m_curve[i].position);
-                // TODO find the size of the vector
-                // Multiply it by the perp vector
-                m_osculatingCircleRadiuses.append(m_curve[i].position + m_perp[i].position * magnitude(m_firstDerivative[i].position) / magnitude(m_secondDerivative[i - 1].position));
+                /*
+                * Curvature K is found by:
+                * using the determinant of the matrix
+                * | fx sx |
+                * | fy sy |
+                * f is the first derivative and s is the second derivative
+                *
+                * and deviding it by the velocity (first derivative) vector cubed
+                * 
+                * | f | ^ 3
+                * 
+                */
+                float k = (m_firstDerivative[i].position.x * m_secondDerivative[i].position.y - m_firstDerivative[i].position.y * m_secondDerivative[i].position.x) / magnitude(m_firstDerivative[i].position);
+                m_osculatingCircleRadiuses.append(m_curve[i].position + m_perp[i].position * k / magnitude(m_firstDerivative[i].position) * 100.0f);
             }
         }
     }
