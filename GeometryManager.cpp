@@ -119,6 +119,8 @@ void GeometryManager::Draw()
 	}
 
 	ShowStats();
+
+	m_infoCard.Draw();
 }
 
 /*

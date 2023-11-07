@@ -3,9 +3,8 @@
 #include "Line.h"
 #include "ControlPointArray.h"
 
-#include <memory>
-
 #include "StatsUI.h"
+#include "InfoCard.h"
 
 class GeometryManager {
 public:
@@ -16,7 +15,7 @@ public:
         return instance;
     }
 
-    void Init() { m_statsUI.Init(); };
+    void Init() { m_statsUI.Init(); m_infoCard.Init(); };
 
     void Update();
     void RemoveShape(size_t index);
@@ -38,6 +37,7 @@ private:
     bool OverlapUI();
 
     StatsUI m_statsUI;
+    InfoCard m_infoCard;
 
     std::shared_ptr<Shape> m_lastShape;
     size_t m_selectedIndex;

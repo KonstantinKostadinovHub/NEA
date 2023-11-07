@@ -1,6 +1,7 @@
 #include "StatsUI.h"
 
 #include "World.h"
+#include "InfoCard.h"
 
 void StatsUI::AddButton(size_t i)
 {
@@ -38,13 +39,19 @@ void StatsUI::Run()
 		{
 			if (button.second.Draw())
 			{
-				if (m_selected == button.first)
+				if (Input::IsKeyPressed(sf::Keyboard::LControl) || Input::IsKeyPressed(sf::Keyboard::RControl))
 				{
-					m_selected = STAT::NONE;
-					break;
+					InfoCard::SetInfoCard(INFO_CARD(size_t(INFO_CARD::FIRST_DERIVATIVE) + size_t(m_selected)));
+				}
+				else
+				{
+					if (m_selected == button.first)
+					{
+						m_selected = STAT::NONE;
+						break;
+					}
 				}
 				m_selected = button.first;
-				break;
 			}
 		}
 	}

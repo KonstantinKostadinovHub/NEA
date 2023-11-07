@@ -44,9 +44,17 @@ void PlaygrounUI::Run()
 	{
 		for (auto& itr : m_tools)
 		{
+			
 			if (itr.second.Draw())
 			{
-				m_selectedTool = itr.first;
+				if (Input::IsKeyPressed(sf::Keyboard::LControl) || Input::IsKeyPressed(sf::Keyboard::RControl))
+				{
+					InfoCard::SetInfoCard(INFO_CARD(size_t(itr.first)));
+				}
+				else
+				{
+					m_selectedTool = itr.first;
+				}
 			}
 		}
 	}
