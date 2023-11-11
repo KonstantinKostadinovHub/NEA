@@ -11,7 +11,8 @@ enum class STAT {
 	OSCULATING_CIRCLE = 3,
 	PERPENDICULARS = 4,
 	CONTROL_POINT_GRAPH = 5,
-	COUNT = 6
+	AGENT = 6,
+	COUNT = 7
 };
 
 class StatsUI {

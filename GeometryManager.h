@@ -6,6 +6,8 @@
 #include "StatsUI.h"
 #include "InfoCard.h"
 
+#include "Agent.h"
+
 class GeometryManager {
 public:
     std::vector<std::shared_ptr<Shape>> m_shapes;
@@ -33,6 +35,7 @@ private:
     void CreatePoint();
 
     void ShowStats();
+    void CreateAgent(const sf::VertexArray& v);
 
     bool OverlapUI();
 
@@ -40,6 +43,7 @@ private:
     InfoCard m_infoCard;
 
     std::shared_ptr<Shape> m_lastShape;
+    std::vector<Agent> m_agents;
     size_t m_selectedIndex;
     int m_selectionFlag;
 };

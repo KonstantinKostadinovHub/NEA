@@ -44,12 +44,22 @@ void GeometryManager::ShowStats()
 			case STAT::PERPENDICULARS:
 				Plotter::DrawTangentVectors(m_lastShape->GetVertexArray());
 				break;
+			case STAT::AGENT:
+				CreateAgent(m_lastShape->GetVertexArray());
+				break;
 			default:
 				break;
 			}
 		}
 		ImGui::End();
 	}
+}
+
+void GeometryManager::CreateAgent(const sf::VertexArray& v)
+{
+	Agent agent;
+	agent.Init(v);
+	m_agents.push_back(agent);
 }
 
 bool GeometryManager::OverlapUI()
@@ -102,6 +112,15 @@ void GeometryManager::Update()
 	{
 		m_selectedIndex = size_t(-1);
 	}
+
+	for (size_t i = 0; i < m_agents.size(); i++) 
+	{
+		if (!m_agents[i].Update())
+		{
+			m_agents.erase(m_agents.begin() + i);
+			i--;
+		}
+	}
 }
 
 void GeometryManager::RemoveShape(size_t index)
@@ -116,6 +135,11 @@ void GeometryManager::Draw()
 	for (auto& shape : m_shapes)
 	{
 		shape->Draw();
+	}
+
+	for (auto& a : m_agents)
+	{
+		a.Draw();
 	}
 
 	ShowStats();

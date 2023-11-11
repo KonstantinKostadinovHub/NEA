@@ -32,6 +32,8 @@ void StatsUI::Run()
 {
 	World::draw(m_statsBarSp);
 
+	if (m_selected == STAT::AGENT) m_selected = STAT::NONE;
+
 	ImGui::SetNextWindowPos(ImVec2(27, 80));
 	if (ImGui::Begin("STATS", NULL, DEFAULT_WINDOW))
 	{

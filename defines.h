@@ -6,6 +6,10 @@
 #include <SFML/Graphics.hpp>
 #include "imgui/imgui.h"
 
+#ifndef PI
+#define PI 3.14159265359
+#endif
+
 enum class SCENE{
 	MENU = 1,
 	PLAYGROUND = 2
@@ -79,4 +83,9 @@ static sf::Vector2f lerp(const sf::Vector2f& point1, const sf::Vector2f& point2,
 	result.y = point1.y + (point2.y - point1.y) * t;
 
 	return result;
+}
+
+static float angleFromVector(sf::Vector2f v)
+{
+	return atan2f(v.y, v.x);
 }
