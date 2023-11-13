@@ -13,9 +13,11 @@ public:
 		m_agentTx.loadFromFile(IMAGE_FOLDER + UI_FOLDER + "agent.png");
 		m_agentSp.setTexture(m_agentTx);
 		QueuePath(v);
+		m_lastElement = m_path.front();
 		m_agentSp.setPosition(
-			{ v[0].position.x - m_agentTx.getSize().x, 
-			v[0].position.y - m_agentTx.getSize().y});
+			{ m_path.front().x - m_agentTx.getSize().x / 2,
+			m_path.front().y - m_agentTx.getSize().y / 2});
+		m_path.pop();
 	};
 
 	bool Update();
@@ -37,6 +39,7 @@ private:
 	static sf::Texture m_agentTx;
 	
 	std::queue<sf::Vector2f> m_path;
+	sf::Vector2f m_lastElement;
 
 	void Move();
 };

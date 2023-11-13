@@ -21,19 +21,18 @@ void Agent::Move()
 {
 	if (!m_path.empty())
 	{
-		sf::Vector2f movementVector = m_path.front() - m_agentSp.getPosition()
-			- sf::Vector2f({
-				float(m_agentTx.getSize().x),
-				float(m_agentTx.getSize().y) }) / 2.0f;
-		m_agentSp.setRotation(angleFromVector(movementVector) / PI * 180.0f + 90.0f);
+		sf::Vector2f movementVector = m_path.front() - m_lastElement;
+		float angle = angleFromVector(movementVector);
 
-		m_agentSp.move(m_speed * movementVector);
-			
+		m_agentSp.setRotation(angle / PI * 180.0f + 90.0f);
+
+		m_agentSp.setPosition((m_path.front() - m_lastElement) * m_currT - sf::Vector2f(m_agentTx.getSize().x / 2.0f * angle, m_agentTx.getSize().y / (2.0f * angle)) + m_lastElement);
 
 		m_currT += m_speed;
 
-		if (m_currT > 1.0f)
+		if (m_currT > 1.01f)
 		{
+			m_lastElement = m_path.front();
 			m_path.pop();
 			m_currT = 0.0f;
 		}
