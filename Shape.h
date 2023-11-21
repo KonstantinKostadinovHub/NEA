@@ -12,13 +12,24 @@ public:
     SHAPE m_type;
 
     virtual void Draw() = 0;
-    virtual void AddPoint(sf::Vector2f e) = 0;
-    virtual void SetPoint(size_t index, sf::Vector2f e, int flag = 0) = 0;
+    virtual void AddPoint(sf::Vector2f v) 
+    {
+        m_controlPoints.append(v);
+        m_controlPoints[m_controlPoints.getVertexCount() - 1].color = sf::Color(255, 255, 255, 50);
+        Recalculate();
+        AdditionalCalculations();
+    };
+    void SetPoint(size_t i, sf::Vector2f v, int flag = 0)
+    {
+        m_controlPoints[i].position = v;
+        Recalculate();
+        AdditionalCalculations();
+    };
+
     virtual std::pair<size_t, int> IsSelected() const = 0;
     sf::VertexArray GetVertexArray() const { return m_curve; };
-    virtual size_t GetPointsPerSection() const = 0;
-
-    virtual size_t GetControlPointsCount() = 0;
+    size_t GetControlPointsCount() { return m_controlPoints.getVertexCount(); };
+    size_t GetPointsPerSection() { return m_samples; };
 
     static bool m_drawOsculatingCircleGraph;
 protected:
@@ -28,6 +39,22 @@ protected:
     sf::VertexArray m_secondDerivative;
     sf::VertexArray m_osculatingCircleRadiuses;
 
+    sf::VertexArray m_controlPoints;
+    sf::VertexArray m_curveToDraw;
+    /*
+    * size_t first - index of the point
+    * int second - timestamp in ms when it was last drawn
+    */
+    std::pair<size_t, int> m_lastPointInfo;
+
+    const size_t m_samples = 20;
+    const size_t m_msPerPoint = 15;
+
+    virtual void Recalculate() = 0;
+
+    // used for draw animation
+    void UpdateLastVisiblePoint();
+
     void CDerivative(const sf::VertexArray& in, sf::VertexArray& out)
     {
         out.clear();
@@ -36,7 +63,6 @@ protected:
             out.append(sf::Vector2f(in[i + 1].position.x - in[i].position.x, in[i + 1].position.y - in[i].position.y));
         }
     }
-
     void CPerp() {
         m_perp.clear();
         m_perp = sf::VertexArray(sf::LinesStrip, 0);
@@ -48,7 +74,6 @@ protected:
                     m_curve[i - 1].position.x - m_curve[i].position.x));
         }
     }
-
     void COsculatingRadiuses()
     {
         if (m_drawOsculatingCircleGraph)
@@ -76,4 +101,13 @@ protected:
             }
         }
     }
+    void AdditionalCalculations()
+    {
+        if (m_controlPoints.getVertexCount() > 1)
+        {
+            CDerivative(m_curve, m_firstDerivative);
+            CDerivative(m_firstDerivative, m_secondDerivative);
+            COsculatingRadiuses();
+        }
+    };
 };

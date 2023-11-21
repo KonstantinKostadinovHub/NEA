@@ -3,6 +3,7 @@
 #include "PlaygroundUI.h"
 
 #include "BezierCurve.h"
+#include "BezierSpline.h"
 #include "Plotter.h"
 
 void GeometryManager::CreatePoint()
@@ -16,6 +17,11 @@ void GeometryManager::CreatePoint()
 		break;
 	case SHAPE::BEZIER_CURVE:
 		m_shapes.push_back(std::make_shared<BezierCurve>(
+			sf::Vector2f(Input::MouseCoor())
+			));
+		break;
+	case SHAPE::BEZIER_SPLINE:
+		m_shapes.push_back(std::make_shared<BezierSpline>(
 			sf::Vector2f(Input::MouseCoor())
 			));
 		break;
@@ -46,6 +52,9 @@ void GeometryManager::ShowStats()
 				break;
 			case STAT::AGENT:
 				CreateAgent(m_lastShape->GetVertexArray());
+				break;
+			case STAT::CONTROL_POINT_GRAPH:
+				Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
 				break;
 			default:
 				break;

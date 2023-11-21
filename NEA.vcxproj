@@ -148,6 +148,7 @@
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BezierCurve.cpp" />
+    <ClCompile Include="BezierSpline.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeometryManager.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Agent.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BezierCurve.h" />
+    <ClInclude Include="BezierSpline.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="defines.h" />

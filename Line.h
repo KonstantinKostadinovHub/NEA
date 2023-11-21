@@ -15,7 +15,6 @@ public:
 	void setColor(sf::Color c);
 	void setVertex(std::size_t i, sf::Vector2f v);
 
-	void SetPoint(size_t index, sf::Vector2f v, int flag = 0) override;
 	void AddPoint(sf::Vector2f e) override
 	{
 		m_line.append(e);
@@ -24,9 +23,6 @@ public:
 	void Recalculate();
 
 	void Draw() override;
-
-	size_t GetControlPointsCount() override { return m_line.getVertexCount(); };
-	size_t GetPointsPerSection() const override { return m_pointsPerSection; };
 
 	std::pair<size_t, int> IsSelected() const override;
 private:

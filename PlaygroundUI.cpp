@@ -16,6 +16,10 @@ void PlaygrounUI::LoadTools()
 	_tool.m_name = "BezierCurve";
 	_tool.m_enumCode = SHAPE::BEZIER_CURVE;
 	AddTool(_tool);
+	
+	_tool.m_name = "BezierSpline";
+	_tool.m_enumCode = SHAPE::BEZIER_SPLINE;
+	AddTool(_tool);
 
 	m_splineBarTx.loadFromFile(IMAGE_FOLDER + UI_FOLDER + "spline_bar.png");
 

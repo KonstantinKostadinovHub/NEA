@@ -19,6 +19,7 @@ enum class SHAPE {
 	NONE = 0,
 	LINE = 1,
 	BEZIER_CURVE = 2,
+	BEZIER_SPLINE = 3
 };
 
 const std::string CONFIG_FOLDER = "config/";

@@ -14,12 +14,6 @@ void Line::setVertex(std::size_t i, sf::Vector2f v)
 	m_line[i].position = v;
 }
 
-void Line::SetPoint(size_t index, sf::Vector2f v, int flag)
-{
-
-}
-
-
 void Line::Recalculate()
 {
 	m_curve.clear();
