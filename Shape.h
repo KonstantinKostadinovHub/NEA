@@ -19,7 +19,7 @@ public:
         Recalculate();
         AdditionalCalculations();
     };
-    void SetPoint(size_t i, sf::Vector2f v, int flag = 0)
+    virtual void SetPoint(size_t i, sf::Vector2f v, int flag = 0)
     {
         m_controlPoints[i].position = v;
         Recalculate();
@@ -55,6 +55,7 @@ protected:
     // used for draw animation
     void UpdateLastVisiblePoint();
 
+    // Caclucalting functions
     void CDerivative(const sf::VertexArray& in, sf::VertexArray& out)
     {
         out.clear();

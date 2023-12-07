@@ -24,11 +24,18 @@ public:
 
 	void AddPoint(sf::Vector2f v)
 	{
-		sf::Vector2f cp1, cp2, knot = v, directionVector, lastPoint = m_controlPoints[m_controlPoints.getVertexCount() - 1].position;
-		directionVector = v - lastPoint;
+		sf::Vector2f cp1, cp2, knot = v, directionVector, lastPoint = m_controlPoints[m_controlPoints.getVertexCount() - 1].position, startToFinish = v - lastPoint;
+		if (m_controlPoints.getVertexCount() > 1)
+		{
+			directionVector = lastPoint - m_controlPoints[m_controlPoints.getVertexCount() - 2].position;
+		}
+		else
+		{
+			directionVector = v - lastPoint;
+		}
 		
-		cp1 = lastPoint + directionVector * 0.25f + sf::Vector2f(- directionVector.y, directionVector.x) * 0.2f;
-		cp2 = lastPoint + directionVector * 0.75f + sf::Vector2f(- directionVector.y, directionVector.x) * 0.2f;
+		cp1 = lastPoint + directionVector;
+		cp2 = lastPoint + directionVector * 0.75f + startToFinish * 0.5f + makeUnit(sf::Vector2f(-directionVector.y, directionVector.x)) * 20.0f;
 		
 		m_controlPoints.append(cp1);
 		m_controlPoints.append(cp2);
@@ -37,9 +44,33 @@ public:
 		m_controlPoints[m_controlPoints.getVertexCount() - 1].color = sf::Color(255, 255, 255, 50);
 		Recalculate();
 		AdditionalCalculations();
-	};;
+	}
+
+	void SetPoint(size_t i, sf::Vector2f v, int flag = 0)
+	{
+		if (i == 0 || i % 3 == 0)
+		{
+			sf::Vector2f displacement = v - m_controlPoints[i].position;
+			m_controlPoints[i].position = v;
+			if (i > 1)
+			{
+				m_controlPoints[i - 1].position += displacement;
+			}
+			if (i < m_controlPoints.getVertexCount() - 2 && i != 0)
+			{
+				m_controlPoints[i + 1].position += displacement;
+			}
+		}
+		else
+		{
+			m_controlPoints[i].position = v;
+		}
+		Recalculate();
+		AdditionalCalculations();
+	}
 
 	void Draw() override;
+	void DrawControlPoints();
 
 	std::pair<size_t, int> IsSelected() const override;
 private:
