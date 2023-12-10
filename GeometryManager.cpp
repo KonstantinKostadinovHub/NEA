@@ -4,6 +4,7 @@
 
 #include "BezierCurve.h"
 #include "BezierSpline.h"
+#include "Hermite.h"
 #include "Plotter.h"
 
 void GeometryManager::CreatePoint()
@@ -22,6 +23,11 @@ void GeometryManager::CreatePoint()
 		break;
 	case SHAPE::BEZIER_SPLINE:
 		m_shapes.push_back(std::make_shared<BezierSpline>(
+			sf::Vector2f(Input::MouseCoor())
+			));
+		break;
+	case SHAPE::HERMITE:
+		m_shapes.push_back(std::make_shared<Hermite>(
 			sf::Vector2f(Input::MouseCoor())
 			));
 		break;

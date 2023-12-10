@@ -152,6 +152,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeometryManager.cpp" />
+    <ClCompile Include="Hermite.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="defines.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GeometryManager.h" />
+    <ClInclude Include="Hermite.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui-SFML.h" />

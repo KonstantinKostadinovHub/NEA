@@ -19,7 +19,8 @@ enum class SHAPE {
 	NONE = 0,
 	LINE = 1,
 	BEZIER_CURVE = 2,
-	BEZIER_SPLINE = 3
+	BEZIER_SPLINE = 3,
+	HERMITE = 4,
 };
 
 const std::string CONFIG_FOLDER = "config/";
@@ -37,7 +38,7 @@ static float magnitude(sf::Vector2f a)
 	return sqrt(a.x * a.x + a.y * a.y);
 }
 
-static sf::Vector2f makeUnit(sf::Vector2f v) {
+static sf::Vector2f normalize(sf::Vector2f v) {
 	float l = std::sqrt(v.x * v.x + v.y * v.y);
 	return sf::Vector2f(v.x / l, v.y / l);
 }

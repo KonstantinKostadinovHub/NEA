@@ -117,6 +117,9 @@
     <ClCompile Include="BezierSpline.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="Hermite.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -204,6 +207,9 @@
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="BezierSpline.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Hermite.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
   </ItemGroup>

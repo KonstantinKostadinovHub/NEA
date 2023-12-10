@@ -21,6 +21,10 @@ void PlaygrounUI::LoadTools()
 	_tool.m_enumCode = SHAPE::BEZIER_SPLINE;
 	AddTool(_tool);
 
+	_tool.m_name = "Hermite";
+	_tool.m_enumCode = SHAPE::HERMITE;
+	AddTool(_tool);
+
 	m_splineBarTx.loadFromFile(IMAGE_FOLDER + UI_FOLDER + "spline_bar.png");
 
 	m_splineBarSp.setTexture(m_splineBarTx);

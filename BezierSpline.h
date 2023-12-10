@@ -35,7 +35,7 @@ public:
 		}
 		
 		cp1 = lastPoint + directionVector;
-		cp2 = lastPoint + directionVector * 0.75f + startToFinish * 0.5f + makeUnit(sf::Vector2f(-directionVector.y, directionVector.x)) * 20.0f;
+		cp2 = lastPoint + directionVector * 0.75f + startToFinish * 0.5f + normalize(sf::Vector2f(-directionVector.y, directionVector.x)) * 20.0f;
 		
 		m_controlPoints.append(cp1);
 		m_controlPoints.append(cp2);
