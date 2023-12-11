@@ -8,11 +8,21 @@ void Hermite::Draw()
 {
     UpdateLastVisiblePoint();
     World::draw(m_curveToDraw);
-    World::draw(m_controlPoints);
+    DrawControlPointLines();
+
     for (size_t i = 0; i < m_controlPoints.getVertexCount(); i++)
     {
         auto circle = sf::CircleShape(m_controlPointRadius, 10);
         circle.setPosition(m_controlPoints[i].position - sf::Vector2f(m_controlPointRadius, m_controlPointRadius));
+        
+        if (i % 2 == 1)
+        {
+            circle.setFillColor(sf::Color(90, 90, 90, 255));
+        }
+        else
+        {
+            circle.setFillColor(sf::Color(255, 255, 255, 150));
+        }
         World::draw(circle);
     }
 
@@ -22,6 +32,20 @@ void Hermite::Draw()
         World::draw(m_osculatingCircleRadiuses);
     }
 }
+
+void Hermite::DrawControlPointLines()
+{
+    sf::VertexArray line = sf::VertexArray(sf::Lines, 0);
+    for (size_t i = 0; i < m_controlPoints.getVertexCount(); i += 2)
+    {
+        line.clear();
+        line.append(m_controlPoints[i]);
+        line.append(m_controlPoints[i + 1]);
+        line[0].color = sf::Color(255, 255, 255, 50);
+        line[1].color = sf::Color(255, 255, 255, 50);
+        World::draw(line);
+    }
+};
 
 std::pair<size_t, int> Hermite::IsSelected() const
 {
@@ -80,8 +104,10 @@ sf::Vector2f Hermite::LerpRecursively(sf::VertexArray vertices, float t)
     {
         sf::Vector2f p0 = (2.0f * tCubed - 3.0f * tSquared + 1.0f) * vertices[0].position;
         sf::Vector2f p1 = (-2.0f * tCubed + 3.0f * tSquared) * vertices[2].position;
-        sf::Vector2f m0 = (tCubed - 2.0f * tSquared + t) * vertices[1].position;
-        sf::Vector2f m1 = (tCubed - tSquared) * vertices[3].position;
+        
+        // The tangents are relatively calculated
+        sf::Vector2f m0 = (tCubed - 2.0f * tSquared + t) * (vertices[1].position - vertices[0].position);
+        sf::Vector2f m1 = (tCubed - tSquared) * (vertices[3].position - vertices[2].position);
         
         res = p0 + p1 + m0 + m1;
     }
