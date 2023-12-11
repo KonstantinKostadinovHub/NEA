@@ -8,7 +8,7 @@ void Hermite::Draw()
 {
     UpdateLastVisiblePoint();
     World::draw(m_curveToDraw);
-    //World::draw(m_controlPoints);
+    World::draw(m_controlPoints);
     for (size_t i = 0; i < m_controlPoints.getVertexCount(); i++)
     {
         auto circle = sf::CircleShape(m_controlPointRadius, 10);
@@ -39,16 +39,20 @@ void Hermite::Recalculate()
 {
     m_lastPointInfo.first = 0;
     m_curve.clear();
-    m_curve.append(m_controlPoints[0].position);
-    if (m_controlPoints.getVertexCount() > 2)
+    const size_t controlPointsCount = m_controlPoints.getVertexCount();
+    if (controlPointsCount > 2)
     {
-        const size_t controlPointsCount = m_controlPoints.getVertexCount();
         CalcSection(0);
 
         for (size_t i = 2; i < controlPointsCount - 2; i+=2)
         {
             CalcSection(i);
         }
+        m_curve.append(m_controlPoints[controlPointsCount - 2]);
+    }
+    else 
+    {
+        m_curve.append(m_controlPoints[0]);
     }
 }
 
@@ -60,12 +64,10 @@ void Hermite::CalcSection(size_t i)
         section.append(m_controlPoints[i + j].position);
     }
 
-    for (size_t j = 0; j <= m_samples; j++)
+    for (size_t j = 0; j < m_samples; j++)
     {
         m_curve.append(LerpRecursively(section, 1.0f * j / m_samples));
     }
-
-    m_curve.append(section[2]);
 }
 
 // https://en.wikipedia.org/wiki/Cubic_Hermite_spline

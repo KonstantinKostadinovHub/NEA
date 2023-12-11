@@ -64,18 +64,19 @@ std::pair<size_t, int> BezierSpline::IsSelected() const
 
 void BezierSpline::Recalculate()
 {
+	const size_t controlPointsCount = m_controlPoints.getVertexCount();
 	m_lastPointInfo.first = 0;
 	m_curve.clear();
 	m_curve.append(m_controlPoints[0].position);
-	if (m_controlPoints.getVertexCount() > 1)
+	if (controlPointsCount > 1)
 	{
-		const size_t controlPointsCount = m_controlPoints.getVertexCount();
 		CalcSection(0);
 
 		for (auto i = 3; i < controlPointsCount - 3; i += 3)
 		{
 			CalcSection(i);
 		}
+		m_curve.append(m_controlPoints[controlPointsCount - 1].position);
 	}
 }
 
@@ -107,5 +108,4 @@ void BezierSpline::CalcSection(size_t i)
 	{
 		m_curve.append(LerpRecursively(section, 1.0f * j / m_samples));
 	}
-	m_curve.append(section[3].position);
 }
