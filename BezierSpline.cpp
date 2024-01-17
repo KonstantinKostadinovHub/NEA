@@ -50,18 +50,6 @@ void BezierSpline::DrawControlPoints()
 	}
 }
 
-std::pair<size_t, int> BezierSpline::IsSelected() const
-{
-	for (size_t i = 0; i < m_controlPoints.getVertexCount(); i++)
-	{
-		if (inCircle(m_controlPoints[i].position, m_pointCollisionBox, sf::Vector2f(Input::MouseCoor())))
-		{
-			return { i, 0 };
-		}
-	}
-	return { size_t(-1), -1 };
-}
-
 void BezierSpline::Recalculate()
 {
 	const size_t controlPointsCount = m_controlPoints.getVertexCount();

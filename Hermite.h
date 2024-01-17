@@ -59,7 +59,6 @@ public:
 
 	void Draw() override;
 	void DrawControlPointLines();
-	std::pair<size_t, int> IsSelected() const override;
 private:
 	void Recalculate();
 	void CalcSection(size_t i);

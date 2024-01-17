@@ -3,6 +3,7 @@
 #include "defines.h"
 
 #include <iostream>
+#include "Input.h"
 
 class Shape {
 public:
@@ -26,7 +27,18 @@ public:
         AdditionalCalculations();
     };
 
-    virtual std::pair<size_t, int> IsSelected() const = 0;
+    virtual std::pair<size_t, int> IsSelected() 
+    {
+        for (size_t i = 0; i < m_controlPoints.getVertexCount(); i++)
+        {
+            if (inCircle(m_controlPoints[i].position, m_controlPointRadius, sf::Vector2f(Input::MouseCoor())))
+            {
+                return { i, 0 };
+            }
+        }
+        return { size_t(-1), -1 };
+    }
+
     sf::VertexArray GetVertexArray() const { return m_curve; }
     sf::VertexArray GetFirstDerivative() { return m_firstDerivative; }
     sf::VertexArray GetSecondDerivative() { return m_secondDerivative; }

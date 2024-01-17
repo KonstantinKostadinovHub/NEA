@@ -24,8 +24,3 @@ void Line::Draw()
 		World::draw(circle);
 	}
 }
-
-std::pair<size_t, int> Line::IsSelected() const
-{
-	return { size_t(-1), 0 };
-}

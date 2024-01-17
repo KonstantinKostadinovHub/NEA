@@ -95,8 +95,6 @@ public:
 
 	void Draw() override;
 	void DrawControlPoints();
-
-	std::pair<size_t, int> IsSelected() const override;
 private:
 	void Recalculate() override;
 	sf::Vector2f LerpRecursively(sf::VertexArray vertices, float t);

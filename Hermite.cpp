@@ -47,18 +47,6 @@ void Hermite::DrawControlPointLines()
     }
 };
 
-std::pair<size_t, int> Hermite::IsSelected() const
-{
-    for (size_t i = 0; i < m_controlPoints.getVertexCount(); i++)
-    {
-        if (inCircle(m_controlPoints[i].position, m_controlPointRadius, sf::Vector2f(Input::MouseCoor())))
-        {
-            return { i, 0 };
-        }
-    }
-    return { size_t(-1), -1 };
-}
-
 void Hermite::Recalculate()
 {
     m_lastPointInfo.first = 0;

@@ -15,8 +15,6 @@ public:
 	void Recalculate();
 
 	void Draw() override;
-
-	std::pair<size_t, int> IsSelected() const override;
 private:
 
 };

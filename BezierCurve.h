@@ -24,8 +24,6 @@ public:
 	};
 
 	void Draw() override;
-
-	std::pair<size_t, int> IsSelected() const override;
 private:
 	void Recalculate();
 	sf::Vector2f LerpRecursively(sf::VertexArray vertices, float t);
