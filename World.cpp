@@ -61,9 +61,9 @@ int World::GetTimeInMs()
 
 void World::ShowFPS(float passed)
 {
-	ImGui::SetNextWindowPos(ImVec2(1850, 1060));
+	ImGui::SetNextWindowPos(ImVec2(1750, 1055));
 
-	ImGui::Begin("FPS", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoInputs);
+	ImGui::Begin("FPS", NULL, DEFAULT_WINDOW);
 	
 	std::string fps = "FPS: " + std::to_string(int(1000 / passed));
 	ImGui::Text(fps.c_str());

@@ -67,4 +67,13 @@ void PlaygrounUI::Run()
 		}
 	}
 	ImGui::End();
+
+	std::string mouseCoor = "(" + std::to_string(Input::MouseCoor().x) + ", " + std::to_string(Input::MouseCoor().y) + ")";
+	ImGui::SetNextWindowPos(ImVec2(1650, 1055));
+
+	ImGui::Begin("Mouse Coor", NULL, DEFAULT_WINDOW);
+
+	ImGui::Text(mouseCoor.c_str());
+
+	ImGui::End();
 }
