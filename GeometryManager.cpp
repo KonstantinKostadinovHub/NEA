@@ -93,6 +93,11 @@ void GeometryManager::Update()
 	{
 		if (m_selectedIndex != size_t(-1))
 		{
+			m_selectionFlag = 0;
+			if (Input::IsKeyPressed(sf::Keyboard::LShift))
+			{
+				m_selectionFlag = 1;
+			}
 			m_lastShape->SetPoint(m_selectedIndex, sf::Vector2f(Input::MouseCoor()), m_selectionFlag);
 		}
 		else

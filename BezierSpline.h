@@ -46,9 +46,13 @@ public:
 		AdditionalCalculations();
 	}
 
+	/*
+	* flag = 0 -> normal
+	* flag = 1 -> mirror
+	*/
 	void SetPoint(size_t i, sf::Vector2f v, int flag = 0)
 	{
-		if (i == 0 || i % 3 == 0)
+		if (i % 3 == 0)
 		{
 			sf::Vector2f displacement = v - m_controlPoints[i].position;
 			m_controlPoints[i].position = v;
@@ -64,6 +68,26 @@ public:
 		else
 		{
 			m_controlPoints[i].position = v;
+			size_t indexToMirror = -1;
+			size_t knotIndex = -1;
+			if (flag == 1)
+			{
+				if (flag % 3 == 1 && i > 1)
+				{
+					indexToMirror = i - 2;
+					knotIndex = i - 1;
+				}
+				else if(i + 2 < m_controlPoints.getVertexCount() - 1)
+				{
+					indexToMirror = i + 2;
+					knotIndex = i + 1;
+				}
+			}
+			if (indexToMirror != -1)
+			{
+				sf::Vector2f displacementFromKnot = v - m_controlPoints[knotIndex].position;
+				m_controlPoints[indexToMirror].position = m_controlPoints[knotIndex].position -displacementFromKnot;
+			}
 		}
 		Recalculate();
 		AdditionalCalculations();

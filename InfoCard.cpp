@@ -13,6 +13,7 @@ void InfoCard::Init()
 		AddCard(INFO_CARD(i));
 	}
 	m_infoCardSp.setPosition(1413, 542);
+	m_infoCardSp.setTexture(m_cards[INFO_CARD::NONE]);
 }
 
 void InfoCard::Draw()

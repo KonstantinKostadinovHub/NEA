@@ -30,7 +30,5 @@ private:
 	void Recalculate();
 	sf::Vector2f LerpRecursively(sf::VertexArray vertices, float t);
 
-	const float m_controlPointRadius = 10;
-
 	sf::Color m_color;
 };

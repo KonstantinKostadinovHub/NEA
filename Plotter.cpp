@@ -17,6 +17,12 @@ void Plotter::ControlPointsGraph(SHAPE shape, size_t numberOfPoints)
 	case SHAPE::BEZIER_CURVE:
 		BezierCurveCPG(numberOfPoints);
 		break;
+	case SHAPE::BEZIER_SPLINE:
+		BezierSplineCPG(numberOfPoints);
+		break;
+	case SHAPE::HERMITE:
+		HermiteSplineCPG(numberOfPoints);
+		break;
 	default:
 		break;
 	}
@@ -81,7 +87,22 @@ void Plotter::DrawTangentVectors(const sf::VertexArray& points)
 
 void Plotter::LineCPG(size_t numberOfPoints)
 {
+	float impactOfPoint[2];
+	float x_data[2];
 	
+	ImPlot::SetNextAxesLimits(0, numberOfPoints, 0, 1);
+	if (ImPlot::BeginPlot("Control Point Impact Graph", ImVec2(350, 350), ImPlotFlags_NoFrame))
+	{
+		for (size_t j = 0; j < numberOfPoints; j++)
+		{
+			impactOfPoint[0] = 0;
+			impactOfPoint[1] = 1;
+			x_data[0] = j;
+			x_data[1] = j;
+			ImPlot::PlotLine(std::to_string(j).c_str(), x_data, impactOfPoint, 2);
+		}
+	}
+	ImPlot::EndPlot();
 }
 
 void Plotter::BezierCurveCPG(size_t numberOfPoints)
@@ -96,7 +117,8 @@ void Plotter::BezierCurveCPG(size_t numberOfPoints)
 
  		for (size_t point = 0; point < numberOfPoints; point++)
 		{
-			impactOfPoint[point][i] = (float)binomialCoefficient(numberOfPoints - 1, point) * powf(1.0f - progress, numberOfPoints - point - 1) * powf(progress, point);
+			impactOfPoint[point][i] = (float)binomialCoefficient(numberOfPoints - 1, point) 
+				* powf(1.0f - progress, numberOfPoints - point - 1) * powf(progress, point);
 		}
 		progress += step;
 	}
@@ -109,4 +131,12 @@ void Plotter::BezierCurveCPG(size_t numberOfPoints)
 		}
 	}
 	ImPlot::EndPlot();
+}
+
+void Plotter::BezierSplineCPG(size_t numberOfPoints)
+{
+}
+
+void Plotter::HermiteSplineCPG(size_t numberOfPoints)
+{
 }

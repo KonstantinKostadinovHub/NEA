@@ -65,7 +65,6 @@ private:
 	void CalcSection(size_t i);
 	sf::Vector2f LerpRecursively(sf::VertexArray vertices, float t);
 
-	const float m_controlPointRadius = 10.0f;
 	const float m_defaultVelocityAtPoint = 100.0f;
 
 	sf::Color m_color;

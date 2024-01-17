@@ -38,7 +38,6 @@ void BezierCurve::Recalculate()
 {
 	m_lastPointInfo.first = 0;
 	m_curve.clear();
-	m_curve.append(m_controlPoints[0].position);
 	const size_t controlPointsCount = m_controlPoints.getVertexCount();
 	for (auto i = 0; i < m_samples * controlPointsCount - 2; i++)
 	{

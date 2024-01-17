@@ -48,7 +48,9 @@ protected:
     std::pair<size_t, int> m_lastPointInfo;
 
     const size_t m_samples = 20;
-    const size_t m_msPerPoint = 15;
+    const size_t m_msPerPoint = 15;	
+    const float m_controlPointRadius = 10;
+
 
     virtual void Recalculate() = 0;
 
