@@ -27,9 +27,12 @@ public:
     };
 
     virtual std::pair<size_t, int> IsSelected() const = 0;
-    sf::VertexArray GetVertexArray() const { return m_curve; };
-    size_t GetControlPointsCount() { return m_controlPoints.getVertexCount(); };
-    size_t GetPointsPerSection() { return m_samples; };
+    sf::VertexArray GetVertexArray() const { return m_curve; }
+    sf::VertexArray GetFirstDerivative() { return m_firstDerivative; }
+    sf::VertexArray GetSecondDerivative() { return m_secondDerivative; }
+
+    size_t GetControlPointsCount() { return m_controlPoints.getVertexCount(); }
+    size_t GetPointsPerSection() { return m_samples; }
 
     static bool m_drawOsculatingCircleGraph;
 protected:

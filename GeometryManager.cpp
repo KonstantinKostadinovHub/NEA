@@ -48,10 +48,10 @@ void GeometryManager::ShowStats()
 			switch (m_statsUI.GetSelected())
 			{
 			case STAT::FIRST_DERIVATIVE:
-				Plotter::VelocityGraph(m_lastShape->GetVertexArray(), m_lastShape->GetPointsPerSection());
+				Plotter::Graph(m_lastShape->GetFirstDerivative(), "First Derivative");
 				break;
 			case STAT::SECOND_DERIVATIVE:
-				Plotter::ControlPointsGraph(m_lastShape->m_type, m_lastShape->GetControlPointsCount());
+				Plotter::Graph(m_lastShape->GetSecondDerivative(), "Second Derivative");
 				break;
 			case STAT::PERPENDICULARS:
 				Plotter::DrawTangentVectors(m_lastShape->GetVertexArray());

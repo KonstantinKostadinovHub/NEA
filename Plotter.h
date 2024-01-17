@@ -8,7 +8,7 @@ public:
 	~Plotter() = delete;
 
 	static void ControlPointsGraph(SHAPE shape, size_t numberOfPoints);
-	static void VelocityGraph(const sf::VertexArray& points, size_t pointsPerSection);
+	static void Graph(const sf::VertexArray& points, const char* name);
 
 	static void DrawTangentVectors(const sf::VertexArray& points);
 private:

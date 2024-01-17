@@ -28,33 +28,35 @@ void Plotter::ControlPointsGraph(SHAPE shape, size_t numberOfPoints)
 	}
 }
 
-void Plotter::VelocityGraph(const sf::VertexArray& points, size_t pointsPerSection)
+void Plotter::Graph(const sf::VertexArray& points, const char* name)
 {
-	float* xCoor = new float[pointsPerSection];
-	float* yCoor = new float[pointsPerSection];
-	ImPlot::SetNextAxesLimits(-10.0, 10.0, -10.0, 10.0);
+	float* xCoor = new float[points.getVertexCount()];
+	float* yCoor = new float[points.getVertexCount()];
+	
+	float minX = points[0].position.x, maxX = points[0].position.x, minY = points[0].position.y, maxY = points[0].position.y;
 
-	if (ImPlot::BeginPlot("Velocity Graph", ImVec2(350, 350), ImPlotFlags_NoFrame))
+	for(size_t i = 0; i < points.getVertexCount(); i ++)
 	{
-		for (size_t p = 0; p < points.getVertexCount() - 1; p++)
-		{
-			xCoor[p % pointsPerSection] = points[p].position.x - points[p + 1].position.x;
-			yCoor[p % pointsPerSection] = points[p].position.y - points[p + 1].position.y;
+		xCoor[i] = points[i].position.x;
+		yCoor[i] = points[i].position.y;
+		
+		minX = std::min(points[i].position.x, minX);
+		maxX = std::max(points[i].position.x, maxX);
+	
+		minY = std::min(points[i].position.y, minY);
+		maxY = std::max(points[i].position.y, maxY);
+	}
 
-			if (p % pointsPerSection == pointsPerSection - 1)
-			{
-				if (p != points.getVertexCount() - 2)
-				{
-					ImPlot::PlotLine(std::to_string(p / pointsPerSection).c_str(), xCoor, yCoor, pointsPerSection - 1);
-				}
-				else
-				{
-					ImPlot::PlotLine(std::to_string(p / pointsPerSection).c_str(), xCoor, yCoor, pointsPerSection - 1);
-				}
-			}
-		}
+	ImPlot::SetNextAxesLimits(minX, maxX, minY, maxY);
+
+	if (ImPlot::BeginPlot(name, ImVec2(350, 350), ImPlotFlags_NoFrame))
+	{	
+		ImPlot::PlotLine("Graph", xCoor, yCoor, points.getVertexCount());
 	}
 	ImPlot::EndPlot();
+
+	delete[points.getVertexCount()] xCoor;
+	delete[points.getVertexCount()] yCoor;
 }
 
 void Plotter::DrawTangentVectors(const sf::VertexArray& points)
