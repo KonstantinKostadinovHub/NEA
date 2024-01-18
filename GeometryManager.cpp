@@ -93,12 +93,20 @@ void GeometryManager::Update()
 	{
 		if (m_selectedIndex != size_t(-1))
 		{
-			m_selectionFlag = 0;
-			if (Input::IsKeyPressed(sf::Keyboard::LShift))
+			if (Input::IsMousePressed(mouseBtn::rClick))
 			{
-				m_selectionFlag = 1;
+				m_lastShape->DeletePoint(m_selectedIndex);
+				m_selectedIndex = size_t(-1);
 			}
-			m_lastShape->SetPoint(m_selectedIndex, sf::Vector2f(Input::MouseCoor()), m_selectionFlag);
+			else 
+			{
+				m_selectionFlag = 0;
+				if (Input::IsKeyPressed(sf::Keyboard::LShift))
+				{
+					m_selectionFlag = 1;
+				}
+				m_lastShape->SetPoint(m_selectedIndex, sf::Vector2f(Input::MouseCoor()), m_selectionFlag);
+			}
 		}
 		else
 		{
@@ -118,7 +126,10 @@ void GeometryManager::Update()
 						{
 							CreatePoint();
 						}
-						m_lastShape->AddPoint({ (float)Input::MouseCoor().x, (float)Input::MouseCoor().y });
+						else
+						{
+							m_lastShape->AddPoint({ (float)Input::MouseCoor().x, (float)Input::MouseCoor().y });
+						}
 					}
 					else
 					{

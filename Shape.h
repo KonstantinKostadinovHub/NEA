@@ -26,6 +26,17 @@ public:
         Recalculate();
         AdditionalCalculations();
     };
+    virtual void DeletePoint(size_t index)
+    {
+        printf("HERE");
+        for (size_t i = index; i < m_controlPoints.getVertexCount() - 1; i++)
+        {
+            m_controlPoints[i] = m_controlPoints[i + 1];
+        }
+        m_controlPoints.resize(m_controlPoints.getVertexCount() - 1);
+        Recalculate();
+        AdditionalCalculations();
+    };
 
     virtual std::pair<size_t, int> IsSelected() 
     {

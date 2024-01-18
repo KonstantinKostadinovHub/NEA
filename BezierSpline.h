@@ -93,6 +93,41 @@ public:
 		AdditionalCalculations();
 	}
 
+	void DeletePoint(size_t index)
+	{
+		if (index % 3 == 0)
+		{
+			if (index != 0 && index != m_controlPoints.getVertexCount() - 1)
+			{
+				/* Explanation of why 'm_controlPoints.getVertexCount() - 4'
+				* -1 - miss the last knot
+				* -2 - miss the control point before it
+				* -3 - must be deleted as the last knot will not need it
+				*/
+				
+				for (size_t i = index; i < m_controlPoints.getVertexCount() - 3; i += 3)
+				{
+					m_controlPoints[i - 1] = m_controlPoints[i + 2];
+					m_controlPoints[i] = m_controlPoints[i + 3];
+					if (i < m_controlPoints.getVertexCount() - 4)
+						m_controlPoints[i + 1] = m_controlPoints[i + 4];
+				}
+			}
+			else if (index == 0)
+			{
+				for (size_t i = 0; i < m_controlPoints.getVertexCount() - 3; i ++)
+				{
+					m_controlPoints[i] = m_controlPoints[i + 3];
+				}
+			}
+			
+			m_controlPoints.resize(m_controlPoints.getVertexCount() - 3);
+
+		}
+		Recalculate();
+		AdditionalCalculations();
+	}
+
 	void Draw() override;
 	void DrawControlPoints();
 private:

@@ -137,8 +137,82 @@ void Plotter::BezierCurveCPG(size_t numberOfPoints)
 
 void Plotter::BezierSplineCPG(size_t numberOfPoints)
 {
+	numberOfPoints /= 3;
+	numberOfPoints++;
+	float progress = 0;
+	float step = 1.0f / (float)(m_detailOfGraph - 1);
+	std::vector<float[m_detailOfGraph]> impactOfPoint(4);
+	float x_data[m_detailOfGraph];
+	for (size_t i = 0; i < m_detailOfGraph; i++)
+	{
+		x_data[i] = progress;
+
+		for (size_t point = 0; point < 4; point++)
+		{
+			impactOfPoint[point][i] = (float)binomialCoefficient(3, point)
+				* powf(1.0f - progress, 3 - point) * powf(progress, point);
+		}
+		progress += step;
+	}
+	ImPlot::SetNextAxesLimits(0, 2, 0, 2);
+	if (ImPlot::BeginPlot("Control Point Impact Graph", ImVec2(350, 350), ImPlotFlags_NoFrame))
+	{
+		for (size_t i = 0; i < numberOfPoints - 1; i++)
+		{
+			for (size_t j = 0; j < 4; j++)
+			{
+				ImPlot::PlotLine(std::to_string(j).c_str(), x_data, impactOfPoint[j], m_detailOfGraph);
+			}
+			for (size_t j = 0; j < m_detailOfGraph; j++)
+			{
+				x_data[j]++;
+			}
+		}
+	}
+	ImPlot::EndPlot();
 }
 
 void Plotter::HermiteSplineCPG(size_t numberOfPoints)
 {
+	numberOfPoints /= 2;
+	numberOfPoints++;
+	float progress = 0;
+	float step = 1.0f / (float)(m_detailOfGraph - 1);
+	std::vector<float[m_detailOfGraph]> impactOfPoint(4);
+	float x_data[m_detailOfGraph];
+	
+	float tCubed = 0.0f;
+	float tSquared = 0.0f;
+	
+	for (size_t i = 0; i < m_detailOfGraph; i++)
+	{
+		x_data[i] = progress;
+		tCubed = powf(progress, 3.0f);
+		tSquared = powf(progress, 2.0f);
+
+		impactOfPoint[0][i] = 2.0f * tCubed - 3.0f * tSquared + 1.0f;
+		impactOfPoint[1][i] = -2.0f * tCubed + 3.0f * tSquared;
+
+		// The tangents are relatively calculated
+		impactOfPoint[2][i] = tCubed - 2.0f * tSquared + progress;
+		impactOfPoint[3][i] = tCubed - tSquared;
+
+		progress += step;
+	}
+	ImPlot::SetNextAxesLimits(0, 2, -0.5, 2);
+	if (ImPlot::BeginPlot("Control Point Impact Graph", ImVec2(350, 350), ImPlotFlags_NoFrame))
+	{
+		for (size_t i = 0; i < numberOfPoints - 1; i++)
+		{
+			for (size_t j = 0; j < 4; j++)
+			{
+				ImPlot::PlotLine(std::to_string(j).c_str(), x_data, impactOfPoint[j], m_detailOfGraph);
+			}
+			for (size_t j = 0; j < m_detailOfGraph; j++)
+			{
+				x_data[j]++;
+			}
+		}
+	}
+	ImPlot::EndPlot();
 }

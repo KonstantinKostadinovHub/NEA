@@ -51,7 +51,7 @@ void Input::Update()
 			}
 			else if (m_event.mouseButton.button == sf::Mouse::Right)
 			{
-				m_click = false;
+				m_rClick = false;
 			}
 		}
 	}

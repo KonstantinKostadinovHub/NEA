@@ -57,6 +57,22 @@ public:
 		if(m_controlPoints.getVertexCount() > 2)	AdditionalCalculations();
 	}
 
+	void DeletePoint(size_t index)
+	{
+		if (index % 2 == 0)
+		{
+			for (size_t i = index; i < m_controlPoints.getVertexCount() - 2; i += 3)
+			{
+				m_controlPoints[i] = m_controlPoints[i + 2];
+				m_controlPoints[i + 1] = m_controlPoints[i + 3];
+			}
+			m_controlPoints.resize(m_controlPoints.getVertexCount() - 2);
+
+		}
+		Recalculate();
+		AdditionalCalculations();
+	}
+
 	void Draw() override;
 	void DrawControlPointLines();
 private:
