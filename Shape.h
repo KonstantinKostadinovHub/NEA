@@ -28,7 +28,6 @@ public:
     };
     virtual void DeletePoint(size_t index)
     {
-        printf("HERE");
         for (size_t i = index; i < m_controlPoints.getVertexCount() - 1; i++)
         {
             m_controlPoints[i] = m_controlPoints[i + 1];
@@ -87,7 +86,7 @@ protected:
     void CDerivative(const sf::VertexArray& in, sf::VertexArray& out)
     {
         out.clear();
-        for (size_t i = 0; i < in.getVertexCount() - 1; i++)
+        for (size_t i = 0; (long long)i < (long long)(in.getVertexCount()) - 1ll; i++)
         {
             out.append(sf::Vector2f(in[i + 1].position.x - in[i].position.x, in[i + 1].position.y - in[i].position.y));
         }

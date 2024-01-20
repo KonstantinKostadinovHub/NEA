@@ -50,6 +50,7 @@ void Hermite::DrawControlPointLines()
 void Hermite::Recalculate()
 {
     m_lastPointInfo.first = 0;
+    m_curveToDraw.clear();
     m_curve.clear();
     const size_t controlPointsCount = m_controlPoints.getVertexCount();
     if (controlPointsCount > 2)

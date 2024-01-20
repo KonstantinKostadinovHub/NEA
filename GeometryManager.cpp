@@ -97,6 +97,10 @@ void GeometryManager::Update()
 			{
 				m_lastShape->DeletePoint(m_selectedIndex);
 				m_selectedIndex = size_t(-1);
+				if (m_lastShape->GetControlPointsCount() == 0)
+				{
+					RemoveLastShape();
+				}
 			}
 			else 
 			{
@@ -154,9 +158,17 @@ void GeometryManager::Update()
 	}
 }
 
-void GeometryManager::RemoveShape(size_t index)
+void GeometryManager::RemoveLastShape()
 {
-	m_shapes.erase(m_shapes.begin() + index);
+	for (size_t i = 0; i < m_shapes.size(); i++)
+	{
+		if (m_shapes[i] == m_lastShape)
+		{
+			m_shapes.erase(m_shapes.begin() + i);
+			break;
+		}
+	}
+	m_lastShape.reset();
 }
 
 void GeometryManager::Draw()

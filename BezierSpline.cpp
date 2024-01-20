@@ -54,6 +54,7 @@ void BezierSpline::Recalculate()
 {
 	const size_t controlPointsCount = m_controlPoints.getVertexCount();
 	m_lastPointInfo.first = 0;
+	m_curveToDraw.clear();
 	m_curve.clear();
 	m_curve.append(m_controlPoints[0].position);
 	if (controlPointsCount > 1)

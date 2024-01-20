@@ -95,6 +95,11 @@ public:
 
 	void DeletePoint(size_t index)
 	{
+		if (m_controlPoints.getVertexCount() == 1)
+		{
+			m_controlPoints.clear();
+			return;
+		}
 		if (index % 3 == 0)
 		{
 			if (index != 0 && index != m_controlPoints.getVertexCount() - 1)
@@ -105,7 +110,7 @@ public:
 				* -3 - must be deleted as the last knot will not need it
 				*/
 				
-				for (size_t i = index; i < m_controlPoints.getVertexCount() - 3; i += 3)
+				for (size_t i = index; (long long)i < (long long)(m_controlPoints.getVertexCount()) - 3ll; i += 3)
 				{
 					m_controlPoints[i - 1] = m_controlPoints[i + 2];
 					m_controlPoints[i] = m_controlPoints[i + 3];

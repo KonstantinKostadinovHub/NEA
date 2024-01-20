@@ -20,7 +20,7 @@ public:
     void Init() { m_statsUI.Init(); m_infoCard.Init(); };
 
     void Update();
-    void RemoveShape(size_t index);
+    void RemoveLastShape();
 
     void Draw();
 

@@ -4,12 +4,16 @@
 
 void Line::Recalculate()
 {
-	m_curve.clear();
-	for (size_t i = 0; i < m_controlPoints.getVertexCount() - 1; i++)
+	if (m_controlPoints.getVertexCount() != 0)
 	{
-		for (size_t t = 1; t <= m_samples; t++)
+		m_curve.clear();
+		m_curve.append(m_controlPoints[0]);
+		for (size_t i = 0; i < m_controlPoints.getVertexCount() - 1; i++)
 		{
-			m_curve.append(lerp(m_controlPoints[i].position, m_controlPoints[i + 1].position, 1.0f / float(m_samples) * t));
+			for (size_t t = 1; t <= m_samples; t++)
+			{
+				m_curve.append(lerp(m_controlPoints[i].position, m_controlPoints[i + 1].position, 1.0f / float(m_samples) * t));
+			}
 		}
 	}
 }
