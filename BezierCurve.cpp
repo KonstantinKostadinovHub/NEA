@@ -29,9 +29,9 @@ void BezierCurve::Recalculate()
 	{
 		m_lastPointInfo.first = 0;
 		m_curve.clear();
-		for (auto i = 0; i < m_samples * controlPointsCount - 2; i++)
+		for (auto i = 0; i < m_samples * controlPointsCount; i++)
 		{
-			m_curve.append(LerpRecursively(m_controlPoints, (1.0f * i) / (m_samples * controlPointsCount - 2)));
+			m_curve.append(LerpRecursively(m_controlPoints, (1.0f * i) / (m_samples * controlPointsCount)));
 		}
 		m_curve.append(m_controlPoints[m_controlPoints.getVertexCount() - 1]);
 	}
