@@ -89,19 +89,35 @@ void Plotter::DrawTangentVectors(const sf::VertexArray& points)
 
 void Plotter::LineCPG(size_t numberOfPoints)
 {
-	float impactOfPoint[2];
-	float x_data[2];
+	float impactOfPoint[2][m_detailOfGraph] = { 0.0f };
+	float x_data[m_detailOfGraph] = { 0.0f };
 	
+	float progress = 0.0f;
+	float step = 1.0f / (m_detailOfGraph - 1);
+
+
+	for (size_t i = 0; i < m_detailOfGraph; i++)
+	{
+		x_data[i] = progress;
+
+		impactOfPoint[0][i] = 1.0f - progress;
+		impactOfPoint[1][i] = progress;
+
+		progress += step;
+	}
+
 	ImPlot::SetNextAxesLimits(0, numberOfPoints, 0, 1);
 	if (ImPlot::BeginPlot("Control Point Impact Graph", ImVec2(350, 350), ImPlotFlags_NoFrame))
 	{
+		float finalData[m_detailOfGraph];
 		for (size_t j = 0; j < numberOfPoints; j++)
 		{
-			impactOfPoint[0] = 0;
-			impactOfPoint[1] = 1;
-			x_data[0] = j;
-			x_data[1] = j;
-			ImPlot::PlotLine(std::to_string(j).c_str(), x_data, impactOfPoint, 2);
+			for (size_t i = 0; i < m_detailOfGraph; i++)
+			{
+				finalData[i] = x_data[i] + j;
+			}
+			ImPlot::PlotLine(std::to_string(j).c_str(), finalData, impactOfPoint[0], m_detailOfGraph);
+			ImPlot::PlotLine(std::to_string(j).c_str(), finalData, impactOfPoint[1], m_detailOfGraph);
 		}
 	}
 	ImPlot::EndPlot();
