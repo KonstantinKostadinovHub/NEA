@@ -16,5 +16,7 @@ private:
 	void Draw();
 
 	int selectedModeIndex = 0;
+	sf::Texture m_tex;
+	sf::RectangleShape m_menuSprite;
 	static SCENE scene;
 };

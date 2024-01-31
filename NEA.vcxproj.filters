@@ -40,6 +40,9 @@
     <Filter Include="Header Files\UI">
       <UniqueIdentifier>{9575cb14-4e21-4472-a958-f3cf07f9a37e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{42571864-0453-4038-aeea-8289a47f25b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,9 +69,6 @@
     <ClCompile Include="World.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Config.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -87,9 +87,6 @@
     <ClCompile Include="BezierCurve.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="PlaygroundUI.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="imgui\implot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,17 +96,8 @@
     <ClCompile Include="Plotter.cpp">
       <Filter>Source Files\Plotting</Filter>
     </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StatsUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Source Files\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="InfoCard.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Agent.cpp">
       <Filter>Source Files\Managers</Filter>
@@ -119,6 +107,21 @@
     </ClCompile>
     <ClCompile Include="Hermite.cpp">
       <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCard.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaygroundUI.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +179,6 @@
     <ClInclude Include="BezierCurve.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="PlaygroundUI.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Line.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
@@ -191,17 +191,8 @@
     <ClInclude Include="Plotter.h">
       <Filter>Header Files\Plotting</Filter>
     </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StatsUI.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="InfoCard.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Agent.h">
       <Filter>Header Files\Managers</Filter>
@@ -211,6 +202,18 @@
     </ClInclude>
     <ClInclude Include="Hermite.h">
       <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCard.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StatsUI.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaygroundUI.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

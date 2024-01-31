@@ -13,6 +13,12 @@ Menu::Menu()
 
 void Menu::Init()
 {
+	if (!m_tex.loadFromFile(IMAGE_FOLDER + UI_FOLDER + "menu.png"))
+	{
+		printf("Texture not found for menu image");
+	}
+	m_menuSprite.setTexture(&m_tex);
+	m_menuSprite.setSize({ 1920, 1080 });
 }
 
 void Menu::Run()
@@ -28,19 +34,13 @@ SCENE Menu::getScene()
 
 void Menu::Update()
 {
-	ImGui::Begin(" ", NULL, DEFAULT_WINDOW);
-	ImGui::Text("Choose the game mode");
-	const char* items[] = { "PLAYGROUND" };
-	if (ImGui::Combo("Options", &selectedModeIndex, items, IM_ARRAYSIZE(items))) {
-		printf("%d", selectedModeIndex);
+	World::draw(m_menuSprite);
+	if (Input::IsMousePressed(mouseBtn::click) && inCircle(sf::Vector2f(960, 540), 134, sf::Vector2f(Input::MouseCoor())))
+	{
+		World::setState(SCENE::PLAYGROUND);
 	}
-	if (ImGui::Button("Continue", ImVec2(200, 20))) {
-		World::setState(SCENE(selectedModeIndex + 2));
-	}
-	ImGui::End();
 }
 
 void Menu::Draw()
 {
-    	
 }

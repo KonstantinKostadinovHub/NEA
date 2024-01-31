@@ -109,7 +109,7 @@ protected:
             m_osculatingCircleRadiuses = sf::VertexArray(sf::Lines);
             m_osculatingCircleRadiuses.clear();
             CPerp();
-            for (size_t i = 2; i < m_secondDerivative.getVertexCount(); i++)
+            for (size_t i = 0; i < m_secondDerivative.getVertexCount(); i++)
             {
                 m_osculatingCircleRadiuses.append(m_curve[i].position);
                 /*
@@ -124,8 +124,9 @@ protected:
                 * | f | ^ 3
                 * 
                 */
-                float k = (m_firstDerivative[i].position.x * m_secondDerivative[i].position.y - m_firstDerivative[i].position.y * m_secondDerivative[i].position.x) / magnitude(m_firstDerivative[i].position);
-                m_osculatingCircleRadiuses.append(m_curve[i].position + m_perp[i].position * k / magnitude(m_firstDerivative[i].position) * 100.0f);
+                float k = (m_firstDerivative[i].position.x * m_secondDerivative[i].position.y - m_firstDerivative[i].position.y * m_secondDerivative[i].position.x) / powf(magnitude(m_firstDerivative[i].position), 3.0f);
+                m_osculatingCircleRadiuses.append(m_curve[i].position 
+                    + m_perp[i].position * k * 1000.0f);
             }
         }
     }

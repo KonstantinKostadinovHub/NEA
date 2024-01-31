@@ -141,6 +141,6 @@ private:
 	void CalcSection(size_t i);
 
 	const float m_pointCollisionBox = 10.0f;
-	const float m_controlPointRadius = 5.0f;
+	const float m_controlPointRadius = 10.0f;
 
 };
